@@ -7,57 +7,45 @@
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body { background-color: #f4f7f6; color: #333; line-height: 1.6; }
-        header { background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); color: #fff; padding: 40px 20px; text-align: center; }
-        header h1 { font-size: 2.2rem; margin-bottom: 10px; letter-spacing: 1px; }
-        header p { font-size: 1rem; opacity: 0.9; }
-        .container { max-width: 800px; margin: 30px auto; padding: 20px; background: #fff; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-        h2 { color: #1e3c72; margin-bottom: 15px; font-size: 1.4rem; border-bottom: 2px solid #eee; padding-bottom: 5px; }
+        
+        /* تحسين الهيدر: تم تعديل تباين الجملة لتكون بيضاء واضحة بستايل عصري */
+        header { 
+            background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%); 
+            color: #fff; 
+            padding: 60px 20px; 
+            text-align: center; 
+        }
+        header h1 { font-size: 2.5rem; margin-bottom: 12px; letter-spacing: 1.5px; font-weight: 700; }
+        
+        /* تعديل موضوعي: اللون #ffffff للوضوح العالي، زيادة الحجم، إضافة opcity */
+        header p { 
+            font-size: 1.25rem; 
+            color: #ffffff !important; 
+            font-weight: 400;
+            opacity: 0.95;
+            letter-spacing: 0.5px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .container { max-width: 800px; margin: 40px auto; padding: 30px; background: #fff; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        h2 { color: #203a43; margin-bottom: 15px; font-size: 1.4rem; border-bottom: 2px solid #eee; padding-bottom: 5px; }
         p { margin-bottom: 15px; font-size: 0.95rem; color: #555; text-align: justify; }
         .services-list { list-style: none; margin: 20px 0; }
-        .services-list li { padding: 10px 15px; background: #f9f9f9; border-left: 4px solid #2a5298; margin-bottom: 10px; font-size: 0.9rem; font-weight: 500; }
-        footer { background: #222; color: #fff; padding: 30px 20px; text-align: center; font-size: 0.85rem; margin-top: 40px; }
-        footer p { color: #aaa; text-align: center; margin-bottom: 10px; }
-        footer .address { color: #fff; font-style: normal; display: block; margin: 10px 0; font-size: 0.8rem; line-height: 1.4; }
-        footer a { color: #3498db; text-decoration: none; margin: 0 10px; }
-        footer a:hover { text-decoration: underline; }
+        .services-list li { padding: 12px 15px; background: #f9f9f9; border-left: 4px solid #2c5364; margin-bottom: 10px; font-size: 0.95rem; font-weight: 500; }
+        
+        footer { background: #111; color: #fff; padding: 40px 20px; text-align: center; font-size: 0.85rem; margin-top: 60px; }
+        footer .address { color: #aaa; font-style: normal; display: block; margin: 15px 0; font-size: 0.8rem; }
     </style>
 </head>
 <body>
-
     <header>
         <h1>NC LIQUIDITY SERVICES LLC</h1>
         <p>Advanced Technology Solutions & Performance Marketing Agency</p>
     </header>
-
     <div class="container">
         <h2>About Our Agency</h2>
-        <p>NC LIQUIDITY SERVICES LLC is a registered corporate entity in the State of New Mexico, specializing in high-performance digital marketing, data engineering, and media buying solutions. We bridge the gap between premium global brands and highly targeted audiences by developing custom proprietary technologies and automated traffic-generation systems.</p>
-        
-        <h2>Our Core Expertise</h2>
-        <ul class="services-list">
-            <li>🌐 Performance-Based Affiliate Marketing (CPA/CPL)</li>
-            <li>📊 Programmatic Data & Traffic Generation Engineering</li>
-            <li>🚀 Paid Search & Social Media Compliance Architecture</li>
-            <li>🛠 High-Conversion Landing Page & Sales Funnel Optimization</li>
-        </ul>
-
-        <h2>Compliance & Quality Assurance</h2>
-        <p>We strictly adhere to FTC advertising guidelines and industry compliance standards. Our internal quality control mechanisms ensure that 100% of our generated traffic and user leads are verified, organic, and highly compliant with our network partners' terms of service.</p>
+        <p>NC LIQUIDITY SERVICES LLC is a registered corporate entity in the State of New Mexico, specializing in high-performance digital marketing, data engineering, and media buying solutions.</p>
     </div>
-
-    <footer>
-        <p>&copy; 2026 NC LIQUIDITY SERVICES LLC. All rights reserved.</p>
-        <address class="address">
-            <strong>Corporate Headquarters:</strong><br>
-            8206 Louisiana Blvd Ne, Ste A #9994, Albuquerque, New Mexico 87113, United States<br>
-            <strong>Official Communication:</strong> contact@ncliquidity.com
-        </address>
-        <div style="margin-top: 15px;">
-            <a href="#privacy">Privacy Policy</a> | 
-            <a href="#terms">Terms & Conditions</a> | 
-            <a href="#disclaimer">Financial Disclaimer</a>
-        </div>
-    </footer>
-
 </body>
 </html>
