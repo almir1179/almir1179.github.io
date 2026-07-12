@@ -3,92 +3,400 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>صندوق الهدايا - اربح كل يوم</title>
+    <title>NC Liquidity - أفضل عروض CPA والأفلييت</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
-        .container { max-width: 600px; width: 100%; background: white; border-radius: 15px; box-shadow: 0 10px 40px rgba(0,0,0,0.3); overflow: hidden; }
-        .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 40px 20px; text-align: center; }
-        .header h1 { font-size: 32px; margin-bottom: 10px; }
-        .header p { font-size: 16px; opacity: 0.95; }
-        .content { padding: 40px 20px; }
-        .benefit { background: #f0f0f0; padding: 15px; margin: 15px 0; border-radius: 8px; display: flex; align-items: center; gap: 15px; }
-        .benefit-icon { font-size: 32px; min-width: 40px; }
-        .benefit-text { font-size: 14px; color: #333; }
-        .timer { background: #ffeb3b; padding: 15px; border-radius: 8px; text-align: center; margin: 20px 0; font-weight: bold; color: #333; }
-        .cta-btn { width: 100%; background: linear-gradient(135deg, #ff6b6b 0%, #ff5252 100%); color: white; padding: 18px; border: none; border-radius: 8px; font-size: 18px; font-weight: bold; cursor: pointer; transition: all 0.3s; margin: 20px 0; }
-        .cta-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(255, 107, 107, 0.4); }
-        .task-list { background: #f0f0f0; padding: 20px; border-radius: 8px; margin: 20px 0; }
-        .task { margin: 10px 0; padding: 10px; background: white; border-radius: 5px; display: flex; justify-content: space-between; align-items: center; }
-        .task-reward { background: #667eea; color: white; padding: 5px 10px; border-radius: 5px; font-weight: bold; font-size: 12px; }
-        footer { background: #f5f5f5; padding: 20px; text-align: center; font-size: 12px; color: #666; border-top: 1px solid #eee; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        header {
+            background: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        nav {
+            display: flex;
+            gap: 30px;
+        }
+        
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover {
+            color: #667eea;
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            padding: 150px 0 100px;
+            text-align: center;
+            margin-top: 60px;
+        }
+        
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            animation: slideInDown 0.8s ease;
+        }
+        
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+        
+        .cta-btn {
+            background: #ff6b6b;
+            color: #fff;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-block;
+            text-decoration: none;
+            margin: 10px;
+        }
+        
+        .cta-btn:hover {
+            background: #ff5252;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 107, 107, 0.4);
+        }
+        
+        .offers-section {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 50px;
+            color: #333;
+        }
+        
+        .offers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .offer-card {
+            background: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .offer-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .offer-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            padding: 30px 20px;
+            text-align: center;
+        }
+        
+        .offer-icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+        
+        .offer-title {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .offer-reward {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ffeb3b;
+        }
+        
+        .offer-body {
+            padding: 20px;
+        }
+        
+        .offer-description {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+        
+        .offer-details {
+            background: #f0f0f0;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            font-size: 12px;
+            color: #555;
+        }
+        
+        .offer-btn {
+            width: 100%;
+            background: #667eea;
+            color: #fff;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 16px;
+        }
+        
+        .offer-btn:hover {
+            background: #764ba2;
+        }
+        
+        footer {
+            background: #2c3e50;
+            color: #fff;
+            padding: 40px 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            margin-bottom: 20px;
+        }
+        
+        .footer-link {
+            color: #667eea;
+            text-decoration: none;
+            margin: 0 15px;
+        }
+        
+        .footer-link:hover {
+            text-decoration: underline;
+        }
+        
+        @keyframes slideInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 32px;
+            }
+            
+            nav {
+                display: none;
+            }
+            
+            .offers-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <div style="font-size: 48px; margin-bottom: 15px;">🎁</div>
-            <h1>صناديق الهدايا</h1>
-            <p>اكمل مهام بسيطة - اف��ح صناديق - اربح أموال</p>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">💰 NC Liquidity</div>
+                <nav>
+                    <a href="#offers">العروض</a>
+                    <a href="#about">عننا</a>
+                    <a href="#contact">تواصل معنا</a>
+                </nav>
+            </div>
         </div>
-        
-        <div class="content">
-            <div class="timer">⏰ 12 مهمة جديدة متاحة اليوم!</div>
-            
-            <h2 style="color: #333; margin-bottom: 20px; text-align: center;">لماذا هذا ممتع؟</h2>
-            
-            <div class="benefit">
-                <div class="benefit-icon">✨</div>
-                <div class="benefit-text"><strong>مهام بسيطة جداً:</strong> اقرأ، انقر، اكمل - هذا كل شيء!</div>
-            </div>
-            
-            <div class="benefit">
-                <div class="benefit-icon">🎯</div>
-                <div class="benefit-text"><strong>مهام متنوعة:</strong> لن تمل أبداً</div>
-            </div>
-            
-            <div class="benefit">
-                <div class="benefit-icon">💎</div>
-                <div class="benefit-text"><strong>صناديق كنز:</strong> فتح صندوق = جائزة عشوائية</div>
-            </div>
-            
-            <div class="benefit">
-                <div class="benefit-icon">🔓</div>
-                <div class="benefit-text"><strong>بدون حد أقصى:</strong> اكمل مهاماً غير محدودة</div>
-            </div>
-            
-            <h2 style="color: #333; margin-top: 30px; margin-bottom: 20px; text-align: center;">المهام المتاحة</h2>
-            
-            <div class="task-list">
-                <div class="task">
-                    <span>📱 اقرأ مقالة</span>
-                    <div class="task-reward">$0.50</div>
-                </div>
-                <div class="task">
-                    <span>👍 اضغط إعجاب على صفحة</span>
-                    <div class="task-reward">$0.30</div>
-                </div>
-                <div class="task">
-                    <span>📧 اشترك في النشرة البريدية</span>
-                    <div class="task-reward">$0.75</div>
-                </div>
-                <div class="task">
-                    <span>⭐ اترك تقييم</span>
-                    <div class="task-reward">$1.00</div>
-                </div>
-                <div class="task">
-                    <span>🎥 شاهد فيديو</span>
-                    <div class="task-reward">$0.25</div>
-                </div>
-            </div>
-            
-            <button class="cta-btn" onclick="alert('في موقع حقيقي، سيتم إعادة التوجيه إلى صفحة المهام')">ابدأ اكمال المهام - اربح الآن</button>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>اربح المال من أفضل عروض CPA</h1>
+            <p>عروض حصرية وفرص ربحية عالية مع أفضل معدلات العمولات</p>
+            <a href="#offers" class="cta-btn">اكتشف العروض الآن</a>
         </div>
-        
-        <footer>
-            <p>&copy; 2026 NC LIQUIDITY SERVICES LLC | contact@ncliquidity.com</p>
-            <p><a href="#" style="color: #667eea; text-decoration: none;">سياسة الخصوصية</a> | <a href="#" style="color: #667eea; text-decoration: none;">الشروط والأحكام</a></p>
-        </footer>
-    </div>
+    </section>
+
+    <section class="offers-section" id="offers">
+        <div class="container">
+            <h2 class="section-title">🎯 العروض المتاحة</h2>
+            <div class="offers-grid">
+                <!-- عرض 1 -->
+                <div class="offer-card">
+                    <div class="offer-header">
+                        <div class="offer-icon">📱</div>
+                        <div class="offer-title">تطبيق الهاتف الذكي</div>
+                        <div class="offer-reward">$3.50 - $5.00</div>
+                    </div>
+                    <div class="offer-body">
+                        <p class="offer-description">قم بتحميل وتثبيت التطبيق على هاتفك الذكي واحصل على مكافأة فورية.</p>
+                        <div class="offer-details">
+                            ✓ تسجيل سريع<br>
+                            ✓ لا يتطلب معلومات ائتمان<br>
+                            ✓ دفع فوري
+                        </div>
+                        <button class="offer-btn" onclick="window.open('landing-offer-1.html', '_blank')">الانتقال للعرض</button>
+                    </div>
+                </div>
+
+                <!-- عرض 2 -->
+                <div class="offer-card">
+                    <div class="offer-header">
+                        <div class="offer-icon">🎮</div>
+                        <div class="offer-title">لعبة اون لاين</div>
+                        <div class="offer-reward">$4.00 - $6.50</div>
+                    </div>
+                    <div class="offer-body">
+                        <p class="offer-description">العب واربح نقاط يمكن تحويلها إلى أموال حقيقية.</p>
+                        <div class="offer-details">
+                            ✓ ألعاب ممتعة<br>
+                            ✓ جوائز يومية<br>
+                            ✓ سحب الأموال بسهولة
+                        </div>
+                        <button class="offer-btn" onclick="window.open('landing-offer-2.html', '_blank')">الانتقال للعرض</button>
+                    </div>
+                </div>
+
+                <!-- عرض 3 -->
+                <div class="offer-card">
+                    <div class="offer-header">
+                        <div class="offer-icon">📊</div>
+                        <div class="offer-title">استطلاع الرأي</div>
+                        <div class="offer-reward">$2.00 - $4.00</div>
+                    </div>
+                    <div class="offer-body">
+                        <p class="offer-description">شارك رأيك في الاستطلاعات واحصل على تعويض فوري.</p>
+                        <div class="offer-details">
+                            ✓ استطلاعات سهلة<br>
+                            ✓ وقت قصير<br>
+                            ✓ تعويض محضوم
+                        </div>
+                        <button class="offer-btn" onclick="window.open('landing-offer-3.html', '_blank')">الانتقال للعرض</button>
+                    </div>
+                </div>
+
+                <!-- عرض 4 -->
+                <div class="offer-card">
+                    <div class="offer-header">
+                        <div class="offer-icon">💳</div>
+                        <div class="offer-title">بطاقة ائتمان</div>
+                        <div class="offer-reward">$15.00 - $25.00</div>
+                    </div>
+                    <div class="offer-body">
+                        <p class="offer-description">افتح حساب بطاقة ائتمان وحصل على مكافأة ترحيب ضخمة.</p>
+                        <div class="offer-details">
+                            ✓ معدل موافقة عالي<br>
+                            ✓ لا رسوم سنوية<br>
+                            ✓ فوائد إضافية
+                        </div>
+                        <button class="offer-btn" onclick="window.open('landing-offer-4.html', '_blank')">الانتقال للعرض</button>
+                    </div>
+                </div>
+
+                <!-- عرض 5 -->
+                <div class="offer-card">
+                    <div class="offer-header">
+                        <div class="offer-icon">🎁</div>
+                        <div class="offer-title">صندوق الهدايا</div>
+                        <div class="offer-reward">$5.00 - $10.00</div>
+                    </div>
+                    <div class="offer-body">
+                        <p class="offer-description">اكمل المهام البسيطة وفتح صناديق الهدايا واربح أموالاً.</p>
+                        <div class="offer-details">
+                            ✓ مهام بسيطة جداً<br>
+                            ✓ نتائج فورية<br>
+                            ✓ لا توجد حد أقصى
+                        </div>
+                        <button class="offer-btn" onclick="window.open('landing-offer-5.html', '_blank')">الانتقال للعرض</button>
+                    </div>
+                </div>
+
+                <!-- عرض 6 -->
+                <div class="offer-card">
+                    <div class="offer-header">
+                        <div class="offer-icon">💰</div>
+                        <div class="offer-title">برنامج الكشف عن الأموال</div>
+                        <div class="offer-reward">$10.00 - $20.00</div>
+                    </div>
+                    <div class="offer-body">
+                        <p class="offer-description">اكتشف الأموال المفقودة باسمك وادعها مباشرة.</p>
+                        <div class="offer-details">
+                            ✓ خدمة مجانية<br>
+                            ✓ عملية آمنة<br>
+                            ✓ نتائج مضمونة
+                        </div>
+                        <button class="offer-btn" onclick="window.open('landing-offer-6.html', '_blank')">الانتقال للعرض</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <h3>NC Liquidity - عروض CPA والأفلييت</h3>
+                <p>أفضل عروض الأفلييت وفرص ربحية عالية</p>
+            </div>
+            <div class="footer-content">
+                <a href="mailto:contact@ncliquidity.com" class="footer-link">contact@ncliquidity.com</a>
+            </div>
+            <div class="footer-content">
+                <a href="privacy.html" class="footer-link">سياسة الخصوصية</a>
+                <a href="terms.html" class="footer-link">الشروط والأحكام</a>
+            </div>
+            <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #444;">
+                <p>&copy; 2026 NC LIQUIDITY SERVICES LLC. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
