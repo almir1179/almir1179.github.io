@@ -12,7 +12,7 @@
     .box { max-width: 500px; margin: auto; background: #1a1a1a; padding: 40px; border-radius: 12px; border: 2px solid #00ff88; }
     h1 { color: #00ff88; }
     #timer { font-size: 48px; font-weight: bold; color: #00ff88; }
-    .btn { display: inline-block; margin-top: 20px; padding: 15px 30px; background: #00ff88; color: #000; text-decoration: none; border-radius: 8px; font-weight: bold; }
+    .btn { display: inline-block; margin-top: 20px; padding: 15px 30px; background: #00ff88; color: #000; text-decoration: none; border-radius: 8px; font-weight: bold; cursor: pointer; }
     a { color: #00ff88; }
   </style>
 
@@ -28,6 +28,15 @@
       }
     }
     window.onload = countdown;
+
+    // دالة تشغيل إعلان بوبكاش فقط عند الضغط على الزر
+    function triggerAd() {
+      if (typeof wp_f !== 'undefined') {
+        var pop_tag = new wp_f();
+        pop_tag.set_wid('755947');
+        pop_tag.set_uid('503511');
+      }
+    }
   </script>
 </head>
 <body>
@@ -37,20 +46,17 @@
     <p>You are being redirected to our official partner to confirm your entry for the $10,000 Sweepstakes.</p>
     <div id="timer">3</div>
     <p>Redirecting in seconds...</p>
-    <a href="https://singingfiles.com" class="btn">Click Here If Not Redirected</a>
+    
+    <!-- تم ربط الزر بفتح الإعلان وعرض الـ CPA معاً -->
+    <a href="https://singingfiles.com" target="_blank" onclick="triggerAd()" class="btn">Click Here If Not Redirected</a>
     
     <p style="font-size:12px; margin-top:30px; opacity:0.7;">
       Sponsored by NC LIQUIDITY SERVICES LLC. See <a href="/terms">Official Rules</a>
     </p>
   </div>
 
-  <!-- كود الإعلان والربح الحقيقي والنهائي لشركة PopCash -->
-  <script type="text/javascript">
-     var uid = '503511';
-     var wid = '755947';
-     var pop_tag = document.createElement('script');pop_tag.src='//cdn.popcash.net/show.js';document.body.appendChild(pop_tag);
-     pop_tag.onerror = function() {pop_tag = document.createElement('script');pop_tag.src='//cdn2.popcash.net/show.js';document.body.appendChild(pop_tag)};
-  </script>
+  <!-- استدعاء ملف شركة بوبكاش بدون تشغيل تلقائي في الفراغ -->
+  <script type="text/javascript" src="//cdn.popcash.net/show.js" async></script>
 
 </body>
 </html>
