@@ -22,7 +22,6 @@
             position: relative;
         }
 
-        /* NEW: Confetti and petals falling */
         .confetti-container {
             position: absolute;
             top: 0;
@@ -45,7 +44,6 @@
             100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
         }
 
-        /* Particles background */
         .particles {
             position: absolute;
             top: 0;
@@ -89,16 +87,12 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .live-emojis {
-            margin-bottom: 25px;
-        }
-
+        .live-emojis { margin-bottom: 25px; }
         .emoji {
             font-size: 65px;
             display: inline-block;
             animation: pulseEmoji 0.8s infinite alternate ease-in-out;
         }
-
         @keyframes pulseEmoji {
             0% { transform: scale(1) rotate(-8deg); filter: drop-shadow(0 0 5px rgba(255, 20, 147, 0.6)); }
             100% { transform: scale(1.18) rotate(8deg); filter: drop-shadow(0 0 30px rgba(255, 69, 0, 1)); }
@@ -115,7 +109,6 @@
             text-transform: uppercase;
             animation: hotGlow 1.5s infinite alternate ease-in-out;
         }
-
         @keyframes hotGlow {
             0% { text-shadow: 0 0 8px rgba(255, 20, 147, 0.4), 0 0 15px rgba(255, 20, 147, 0.2); transform: scale(1); }
             100% { text-shadow: 0 0 25px rgba(255, 20, 147, 0.9), 0 0 40px rgba(255, 20, 147, 0.6); transform: scale(1.03); }
@@ -131,7 +124,6 @@
             letter-spacing: -0.5px;
             animation: textPulse 1.8s infinite alternate ease-in-out;
         }
-
         @keyframes textPulse {
             0% { opacity: 0.85; transform: scale(0.98); }
             100% { opacity: 1; transform: scale(1); }
@@ -186,30 +178,21 @@
             background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
             transition: 0.5s;
         }
-        .giant-cta-btn:hover::before {
-            left: 100%;
-        }
-
+        .giant-cta-btn:hover::before { left: 100%; }
         @keyframes gradientShift {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
-
         @keyframes buttonPulse {
             0% { transform: scale(1); box-shadow: 0 12px 35px rgba(255, 0, 127, 0.5); }
             100% { transform: scale(1.05); box-shadow: 0 20px 45px rgba(255, 69, 0, 0.8); }
         }
-
         .giant-cta-btn:hover {
             transform: scale(1.08);
             filter: brightness(1.15);
         }
-
-        .btn-icon {
-            font-size: 28px;
-            filter: drop-shadow(0 0 8px rgba(255,255,255,0.5));
-        }
+        .btn-icon { font-size: 28px; filter: drop-shadow(0 0 8px rgba(255,255,255,0.5)); }
 
         .trust-badges {
             display: flex;
@@ -221,37 +204,18 @@
             font-weight: 600;
             flex-wrap: wrap;
         }
-        .badge {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .terms-text {
-            margin-top: 25px;
-            font-size: 12px;
-            color: #666;
-            line-height: 1.4;
-            font-weight: 400;
-        }
+        .badge { display: flex; align-items: center; gap: 5px; }
+        .terms-text { margin-top: 25px; font-size: 12px; color: #666; line-height: 1.4; font-weight: 400; }
 
         @media (max-width: 400px) {
-            .giant-cta-btn {
-                font-size: 20px;
-                padding: 18px 10px;
-            }
-            h1 {
-                font-size: 30px;
-            }
-            .emoji {
-                font-size: 55px;
-            }
+            .giant-cta-btn { font-size: 20px; padding: 18px 10px; }
+            h1 { font-size: 30px; }
+            .emoji { font-size: 55px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- NEW: Confetti container for petals and stars -->
     <div class="confetti-container" id="confetti"></div>
     <div class="particles" id="particles"></div>
 
@@ -270,7 +234,8 @@
             🔒 Limited Access: <span id="timer">05:00</span> remaining
         </div>
 
-        <a href="https://YOUR-LINK.COM" target="_blank" rel="noopener noreferrer" class="giant-cta-btn">
+        <!-- تم ربط الزرار بلينك Mobidea + تتبع PopAds -->
+        <a href="https://www.passingcars.wiki/?sl=6125531-1bf82&pub_click_id={zoneid}&site={country}&pub_sub_id={device}" class="giant-cta-btn">
             <span class="btn-icon">🔑</span>
             <span>ENTER IF YOU</span>
             <span>ARE 18+</span>
@@ -279,7 +244,7 @@
         <div class="trust-badges">
             <div class="badge">🔒 Secure</div>
             <div class="badge">✓ 18+ Verified</div>
-            <div class="badge">⚡ Instant Access</div>
+            <div class="badge">⚡ Instant Access</div> <!-- تم حذف FREE -->
         </div>
 
         <div class="terms-text">
@@ -288,7 +253,6 @@
     </div>
 
     <script>
-        // NEW: Confetti generator - Petals, Stars, Hearts
         const confettiContainer = document.getElementById('confetti');
         const confettiItems = ['🌸', '⭐', '💖', '✨', '🌺'];
         
@@ -301,19 +265,34 @@
             confetti.style.animationDuration = Math.random() * 5 + 5 + 's';
             confetti.style.animationDelay = Math.random() * 3 + 's';
             confettiContainer.appendChild(confetti);
-            
-            // Remove after animation
             setTimeout(() => confetti.remove(), 10000);
         }
-        
-        // Create confetti every 200ms
         setInterval(createConfetti, 200);
 
-        // Particles generator
         const particlesContainer = document.getElementById('particles');
         for(let i = 0; i < 20; i++) {
             const particle = document.createElement('div');
             particle.className = 'particle';
+            particle.style.width = Math.random() * 10 + 5 + 'px';
+            particle.style.height = particle.style.width;
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 15 + 's';
+            particle.style.animationDuration = Math.random() * 10 + 10 + 's';
+            particlesContainer.appendChild(particle);
+        }
+
+        let time = 300;
+        const timerEl = document.getElementById('timer');
+        setInterval(() => {
+            let minutes = Math.floor(time / 60);
+            let seconds = time % 60;
+            timerEl.textContent = `${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')}`;
+            if(time > 0) time--;
+        }, 1000);
+    </script>
+
+</body>
+</html>            particle.className = 'particle';
             particle.style.width = Math.random() * 10 + 5 + 'px';
             particle.style.height = particle.style.width;
             particle.style.left = Math.random() * 100 + '%';
