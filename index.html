@@ -1,68 +1,209 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- كود التحقق من ملكية الموقع لشركة بوبكاش -->
-  <meta name="ppck-ver" content="15fdcb31bdc1dac4baa38d41f80dc08d" />
-  <title>MDMExclusives | Premium Sweepstakes Entry</title>
-  <style>
-      * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-      body { background: #0f2027; background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%); color: #fff; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
-      .card { max-width: 480px; width: 100%; background: #ffffff; border-radius: 16px; padding: 35px 25px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.3); border-top: 5px solid #3498db; color: #333; }
-      .badge { background: #e74c3c; color: #fff; padding: 6px 14px; font-size: 0.8rem; font-weight: bold; border-radius: 20px; display: inline-block; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; }
-      h1 { font-size: 2rem; margin-bottom: 12px; color: #203a43; font-weight: 700; }
-      p { font-size: 1rem; color: #555; margin-bottom: 20px; line-height: 1.6; text-align: center; }
-      .cash-icon { font-size: 5rem; margin-bottom: 15px; animation: pulse 2s infinite; display: inline-block; }
-      #timer-box { font-size: 1.1rem; font-weight: bold; color: #e74c3c; margin-bottom: 20px; }
-      #timer { font-size: 2rem; display: block; color: #2a5298; }
-      @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
-      .btn { display: block; width: 100%; background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); color: #fff; text-decoration: none; padding: 16px; font-size: 1.15rem; font-weight: bold; border-radius: 8px; box-shadow: 0 5px 15px rgba(30,60,114,0.3); transition: all 0.2s; text-transform: uppercase; letter-spacing: 0.5px; cursor: pointer; }
-      .btn:hover { background: linear-gradient(135deg, #2a5298 0%, #1e3c72 100%); transform: translateY(-2px); box-shadow: 0 7px 20px rgba(30,60,114,0.4); }
-      .secure-text { font-size: 0.8rem; color: #27ae60; margin-top: 15px; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 5px; }
-      footer { margin-top: 30px; font-size: 0.75rem; color: #888; border-top: 1px solid #eee; padding-top: 20px; line-height: 1.4; }
-      a { color: #3498db; }
-  </style>
-  <script>
-      let timeLeft = 3;
-      function countdown() {
-        document.getElementById("timer").innerText = timeLeft;
-        if(timeLeft <= 0){
-          window.location.href = "https://singingfiles.com";
-        } else {
-          timeLeft--;
-          setTimeout(countdown, 1000);
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NC Liquidity Services LLC | Global Fintech Consulting & Liquidity Solutions</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #0f172a;
+            --secondary-color: #0284c7;
+            --accent-color: #f59e0b;
+            --text-color: #334155;
+            --bg-light: #f8fafc;
+            --card-bg: #ffffff;
         }
-      }
-      window.onload = countdown;
 
-      function triggerAd() {
-        if (typeof wp_f !== 'undefined') {
-          var pop_tag = new wp_f();
-          pop_tag.set_wid('755947');
-          pop_tag.set_uid('503511');
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+        html { scroll-behavior: smooth; }
+        body { background-color: var(--bg-light); color: var(--text-color); line-height: 1.7; }
+
+        /* Header & Navigation - UPDATED LOGO */
+        header {
+            background-color: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(10px);
+            padding: 16px 10%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
         }
-      }
-  </script>
+
+        .logo {
+            color: #ffffff;
+            font-size: 22px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            letter-spacing: -0.5px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--secondary-color) 0%, var(--accent-color) 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3);
+        }
+
+        .logo-icon svg { width: 26px; height: 26px; fill: white; }
+        .logo span { color: var(--accent-color); }
+        .logo-text { line-height: 1.2; }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 28px;
+            transition: all 0.3s;
+            font-size: 15px;
+            font-weight: 600;
+        }
+        nav a:hover { color: var(--accent-color); }
+
+        /* باقي الكود زي ما هو */
+        .hero { background: radial-gradient(circle at 20% 50%, rgba(2, 132, 199, 0.15) 0%, transparent 50%), linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: white; padding: 120px 10% 140px; display: flex; align-items: center; justify-content: space-between; gap: 60px; }
+        .hero-text { flex: 1.2; }
+        .hero-text h1 { font-size: 48px; line-height: 1.15; margin-bottom: 24px; font-weight: 800; color: #ffffff; letter-spacing: -1px; }
+        .hero-text h1 span { color: var(--secondary-color); }
+        .hero-text p { color: #94a3b8; font-size: 18px; margin-bottom: 40px; max-width: 550px; }
+        .btn { background: linear-gradient(90deg, var(--secondary-color) 0%, #0ea5e9 100%); color: white; padding: 16px 38px; border-radius: 8px; text-decoration: none; font-weight: 700; display: inline-block; transition: all 0.3s; box-shadow: 0 8px 20px rgba(2, 132, 199, 0.3); }
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(2, 132, 199, 0.4); }
+        .hero-image { flex: 0.8; text-align: center; }
+        .hero-graphic { background: linear-gradient(135deg, rgba(2,132,199,0.1) 0%, rgba(245,158,11,0.05) 100%); border: 1px solid rgba(2, 132, 199, 0.2); padding: 50px 30px; border-radius: 20px; color: #ffffff; transition: all 0.4s ease; backdrop-filter: blur(10px); margin: 0 auto; max-width: 360px; }
+        .hero-graphic:hover { border-color: var(--accent-color); transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
+        .hero-graphic i { font-size: 72px; color: var(--accent-color); margin-bottom: 20px; animation: pulse 2.5s infinite ease-in-out; }
+        @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 0.9; } 50% { transform: scale(1.08); opacity: 1; filter: drop-shadow(0 0 20px rgba(245,158,11,0.7)); } }
+        .stats { background: var(--card-bg); padding: 45px 10%; display: flex; justify-content: space-around; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.08); margin: -60px 10% 0; border-radius: 16px; position: relative; z-index: 10; border: 1px solid #e2e8f0; }
+        .stat-item { text-align: center; }
+        .stat-item h3 { font-size: 36px; color: var(--secondary-color); font-weight: 800; letter-spacing: -1px; }
+        .stat-item p { color: #64748b; font-size: 14px; font-weight: 600; margin-top: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .services { padding: 120px 10% 100px; text-align: center; }
+        .section-title { font-size: 36px; color: var(--primary-color); margin-bottom: 60px; font-weight: 800; letter-spacing: -0.5px; }
+        .section-title::after { content: ''; display: block; width: 70px; height: 4px; background: linear-gradient(90deg, var(--secondary-color), var(--accent-color)); margin: 18px auto 0; border-radius: 2px; }
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 35px; margin-top: 20px; }
+        .service-card { background: var(--card-bg); padding: 50px 40px; border-radius: 16px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.03); transition: all 0.4s; text-align: left; border: 1px solid #f1f5f9; }
+        .service-card:hover { transform: translateY(-8px); box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border-color: #e2e8f0; }
+        .service-icon { font-size: 38px; color: var(--secondary-color); margin-bottom: 28px; background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%); width: 75px; height: 75px; display: flex; align-items: center; justify-content: center; border-radius: 14px; }
+        .service-card h4 { font-size: 21px; color: var(--primary-color); margin-bottom: 16px; font-weight: 700; }
+        .service-card p { font-size: 15px; color: #64748b; }
+        footer { background: var(--primary-color); color: #94a3b8; padding: 70px 10% 30px; text-align: center; border-top: 1px solid #1e293b; }
+        .footer-content { margin-bottom: 35px; }
+        .footer-content h2 { color: white; font-size: 26px; margin-bottom: 12px; font-weight: 800; }
+        .footer-links { margin-bottom: 30px; }
+        .footer-links a { color: #cbd5e1; text-decoration: none; margin: 0 18px; font-size: 14px; font-weight: 600; transition: color 0.3s; }
+        .footer-links a:hover { color: var(--accent-color); }
+        .copy-right { font-size: 13px; margin-top: 30px; color: #64748b; line-height: 1.8; border-top: 1px solid #1e293b; padding-top: 25px; }
+        @media (max-width: 992px) {
+            header { padding: 16px 5%; flex-direction: column; gap: 15px; }
+            nav a { margin: 0 12px; }
+            .hero { flex-direction: column; text-align: center; padding: 80px 5%; }
+            .hero-text p { margin: 0 auto 40px; }
+            .stats { flex-direction: column; gap: 35px; margin: -40px 5% 0; padding: 35px; }
+            .services { padding: 80px 5%; }
+            footer { padding: 60px 5% 30px; }
+        }
+    </style>
 </head>
 <body>
-  <div class="card">
-      <span class="badge">Official Giveaway</span>
-      <div class="cash-icon">💰</div>
-      <h1>Enter to Win $10,000 Now!</h1>
-      <p>Confirm your eligibility instantly. Legal US residents (18+) can submit a free email entry for the official 2026 drawing sweepstakes. No purchase necessary.</p>
-      
-      <div id="timer-box">Redirecting in: <span id="timer">3</span> seconds...</div>
 
-      <a href="https://singingfiles.com" target="_blank" onclick="triggerAd()" class="btn">Confirm Free Entry</a>
-      
-      <div class="secure-text">🔒 Official Verified Connection</div>
-      <footer>
-          This optimization routing funnel is securely powered by <strong>NC LIQUIDITY SERVICES LLC</strong>.<br>
-          All marketing practices comply fully with premium CPA traffic distribution policies. See <a href="/terms">Official Rules</a>
-      </footer>
-  </div>
+    <!-- Header Navigation - WITH PREMIUM LOGO -->
+    <header>
+        <a href="#" class="logo">
+            <div class="logo-icon">
+                <!-- Logo SVG: N + C + Liquidity Wave -->
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 13h2v-2H3v2zm4 0h14v-2H7v2z"/>
+                    <path d="M3 17h2v-2H3v2zm4 0h14v-2H7v2z"/>
+                    <path d="M3 9h2V7H3v2zm4 0h14V7H7v2z"/>
+                    <path d="M4 3h16a1 1 0 011 1v16a1 1 0 01-1 1H4a1 1 0 01-1-1V4a1 1 0 011-1z" fill="none" stroke="white" stroke-width="1.5"/>
+                </svg>
+            </div>
+            <div class="logo-text">
+                NC <span>LIQUIDITY</span>
+            </div>
+        </a>
+        <nav>
+            <a href="#services">Our Solutions</a>
+            <a href="#footer">Corporate Info</a>
+        </nav>
+    </header>
 
-  <script type="text/javascript" src="//cdn.popcash.net/show.js" async></script>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-text">
+            <h1>Next-Generation <span>Fintech Consulting</span> & Infrastructure</h1>
+            <p>Empowering commercial enterprises with optimized corporate architectures, high-tier liquidity management advisory, and digital platform consulting frameworks tailored for 2026 economic landscapes.</p>
+            <a href="#services" class="btn">Explore Infrastructure Solutions</a>
+        </div>
+        <div class="hero-image">
+            <div class="hero-graphic">
+                <i class="fa-solid fa-shield-halved"></i>
+                <h3 style="color: #ffffff; font-size: 22px; font-weight: 700; margin-bottom: 10px;">NC Liquidity Shield</h3>
+                <p style="color: #94a3b8; font-size: 14px;">Enterprise-Grade Security & Compliance</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="stat-item"><h3>$2.5B+</h3><p>Assets Managed</p></div>
+        <div class="stat-item"><h3>150+</h3><p>Global Clients</p></div>
+        <div class="stat-item"><h3>99.9%</h3><p>Uptime SLA</p></div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <h2 class="section-title">Our Core Solutions</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon"><i class="fa-solid fa-building-columns"></i></div>
+                <h4>Corporate Liquidity Advisory</h4>
+                <p>Strategic liquidity optimization and capital structure design for multinational enterprises and financial institutions.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon"><i class="fa-solid fa-code-branch"></i></div>
+                <h4>Fintech Infrastructure</h4>
+                <p>End-to-end digital platform architecture, API integrations, and compliance-first technology solutions.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon"><i class="fa-solid fa-globe"></i></div>
+                <h4>Global Market Expansion</h4>
+                <p>Market entry strategies, regulatory navigation, and cross-border payment infrastructure consulting.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="footer">
+        <div class="footer-content">
+            <h2>NC Liquidity Services LLC</h2>
+            <p>Building the future of financial infrastructure</p>
+        </div>
+        <div class="footer-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Contact</a>
+        </div>
+        <div class="copy-right">
+            © 2026 NC Liquidity Services LLC. All Rights Reserved.<br>
+            A registered financial consulting firm. Not an investment advisor.
+        </div>
+    </footer>
+
 </body>
 </html>
