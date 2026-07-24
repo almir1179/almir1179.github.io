@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Get Premium Book Access</title>
-    <!-- استدعاء الخط الرسمي المماثل للقطة الشاشة -->
-    <link href="https://googleapis.com" rel="stylesheet">
+    <!-- استدعاء خط Inter الرسمي من جوجل لضمان التحميل الفوري على الموبايل -->
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -22,7 +24,7 @@
             background: #ffffff;
             max-width: 430px;
             width: 92%;
-            padding: 50px 24px 40px 24px; /* مسافة علوية موزونة بعد حذف السهم */
+            padding: 50px 24px 40px 24px; 
             box-shadow: 0 4px 20px rgba(0,0,0,0.02);
             border-radius: 0px; 
             text-align: center;
@@ -38,7 +40,7 @@
         .book-icon-wrapper {
             width: 140px;
             height: 140px;
-            background-color: #1e622b; /* اللون الأخضر الداكن المماثل للصورة */
+            background-color: #1e622b; 
             border-radius: 50%;
             display: flex;
             justify-content: center;
@@ -54,7 +56,7 @@
             margin: auto;
         }
         .feature-box {
-            background-color: #f3edf7; /* اللون البنفسجي الفاتح المماثل للصورة */
+            background-color: #f3edf7; 
             border-radius: 16px;
             padding: 18px;
             text-align: left;
@@ -76,7 +78,7 @@
         }
         .btn-action {
             display: block;
-            background-color: #11411e; /* الزر الأخضر الداكن المماثل لصفحتك الجديدة */
+            background-color: #11411e; 
             color: #ffffff;
             text-decoration: none;
             font-size: 18px;
@@ -105,10 +107,10 @@
 
 <div class="premium-container">
     
-    <!-- العنوان الرئيسي المثير -->
+    <!-- العنوان الرئيسي -->
     <div class="main-title">Get premium and unlock the book features</div>
     
-    <!-- اللوجو الاحترافي الجديد (تم ضبط توازن الأبعاد لمنع اقتطاع الأيقونة من الأسفل) -->
+    <!-- الأيقونة الدائرية الموزونة -->
     <div class="book-icon-wrapper">
         <svg viewBox="0 0 24 24">
             <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
@@ -137,16 +139,19 @@
 </div>
 
 <script>
-    // نظام الـ Postback الآمن والذكي لربط العمال بالمعرفات
+    // 1. التقاط معرّف التتبع الفرعي (subid) القادم تلقائياً من حملة TimeBucks
     const urlParams = new URLSearchParams(window.location.search);
     const subId = urlParams.get('subid') || 'DEFAULT_USER';
 
-    // ⚠️ استبدل الرابط أدناه برابط جدار عروضك (Offer Wall Direct URL) الحقيقي من حساب CPAGrip الخاص بك
-    const baseCpaUrl = "https://ncliquidity.com"; 
+    // 2. 🔗 الرابط الحقيقي والكامل للـ Content Locker الخاص بك من CPAGrip
+    const baseCpaUrl = "https://playabledownloads.com/1906235"; 
 
-    // دمج المعرف تلقائياً بالرابط النهائي للزر
-    const finalTrackingUrl = baseCpaUrl + "&subid=" + encodeURIComponent(subId);
-    document.getElementById('offerWallLink').href = finalTrackingUrl;
+    // 3. التقاط عنصر الزر الأخضر الرئيسي في الصفحة
+    const actionBtn = document.getElementById('offerWallLink');
+
+    // 4. دمج معرّف العامل بالرابط النهائي برمجياً لتفادي ضياع أرباح الـ Postback
+    const finalTrackingUrl = baseCpaUrl + (baseCpaUrl.includes('?') ? '&' : '?') + "subid=" + encodeURIComponent(subId);
+    actionBtn.href = finalTrackingUrl;
 </script>
 
 </body>
