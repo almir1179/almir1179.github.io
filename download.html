@@ -3,120 +3,160 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Download App</title>
+
+<title>Google Play Verifizierung</title>
 
 <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-body {
-    font-family: Arial, Helvetica, sans-serif;
-    background: #0f172a; /* خلفية داكنة معاصرة تمنع تشتت العامل */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    padding: 20px;
-    overflow: hidden;
+html,body{
+    width:100%;
+    height:100%;
+    font-family:Arial, Helvetica, sans-serif;
+    background:#0b0f14;
 }
 
-.wrapper {
-    text-align: center;
-    max-width: 400px;
-    width: 100%;
+body{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:15px;
 }
 
-h1 {
-    font-size: 34px;
-    color: #ffffff; /* نص أبيض ناصع بارز */
-    margin-bottom: 8px;
-    font-weight: 900;
-    letter-spacing: -0.5px;
+.wrapper{
+    width:100%;
+    max-width:450px;
+    min-height:100vh;
+    background:#1a648c;
+    display:flex;
+    flex-direction:column;
 }
 
-p {
-    color: #94a3b8; /* لون رمادي خفيف ونظيف */
-    font-size: 16px;
-    margin-bottom: 35px;
+header{
+    background:#111111;
+    padding:15px 20px;
+    text-align:center;
 }
 
-/* سهم تنزيل كلاسيكي عملاق مع تأثير نبض وإشعاع النيون الأخضر */
-.glow-arrow {
-    font-size: 120px; /* حجم عملاق مسيطر بصرياً */
-    line-height: 1;
-    margin-bottom: 35px;
-    display: inline-block;
-    color: #22c55e; /* لون أخضر فوسفوري صريح */
-    animation: pulseVertical 1s infinite ease-in-out;
-    filter: drop-shadow(0 0 25px rgba(34, 197, 94, 0.6)); /* إشعاع نيون قوي خلف السهم */
-    font-weight: 900;
+header h1{
+    color:#fff;
+    font-size:18px;
+    font-weight:700;
 }
 
-@keyframes pulseVertical {
-    0%, 100% { transform: translateY(0) scale(1); }
-    50% { transform: translateY(-15px) scale(1.05); }
+main{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-start;
+    align-items:center;
+    text-align:center;
+    padding:40px 20px;
 }
 
-/* زر التحميل العريض الفاخر باللون الأخضر الدائري */
-.btn-google-play {
-    display: block;
-    background: #22c55e; /* أخضر فوسفوري جذاب جداً للنقر */
-    color: #ffffff;
-    text-decoration: none;
-    padding: 22px;
-    border-radius: 50px; /* زوايا دائرية بالكامل لأسلوب معاصر */
-    font-size: 20px;
-    font-weight: 900;
-    letter-spacing: 0.5px;
-    box-shadow: 0 10px 30px rgba(34, 197, 94, 0.4);
-    transition: all 0.2s ease;
-    text-transform: uppercase;
+.text{
+    color:#fff;
+    font-size:30px;
+    line-height:1.4;
+    font-weight:700;
 }
 
-.btn-google-play:hover {
-    background: #16a34a;
-    box-shadow: 0 12px 35px rgba(22, 163, 74, 0.6);
-    transform: translateY(-2px);
+.highlight{
+    color:#facc15;
+    text-shadow:
+        0 0 8px rgba(250,204,21,.8),
+        0 0 18px rgba(250,204,21,.5);
 }
 
-.btn-google-play:active {
-    transform: translateY(1px);
+.pointer{
+    font-size:58px;
+    margin:28px 0;
+    animation:bounce 1.2s ease-in-out infinite;
 }
 
-.footer-text {
-    margin-top: 30px;
-    font-size: 14px;
-    color: #64748b;
-    font-weight: bold;
+@keyframes bounce{
+    0%,100%{
+        transform:translateY(0);
+    }
+    50%{
+        transform:translateY(10px);
+    }
+}
+
+.button{
+    display:inline-block;
+    padding:18px 40px;
+    border-radius:50px;
+    background:#22c55e;
+    color:#fff;
+    font-size:20px;
+    font-weight:700;
+    text-decoration:none;
+    box-shadow:0 10px 22px rgba(0,0,0,.30);
+    transition:transform .15s ease, box-shadow .15s ease;
+    -webkit-tap-highlight-color:transparent;
+}
+
+.button:hover{
+    box-shadow:0 12px 24px rgba(0,0,0,.35);
+}
+
+.button:active{
+    transform:scale(.98);
+}
+
+@media (max-width:380px){
+
+.text{
+    font-size:26px;
+}
+
+.button{
+    font-size:18px;
+    padding:16px 34px;
+}
+
+.pointer{
+    font-size:50px;
+}
+
 }
 </style>
-</head>
 
+</head>
 <body>
 
 <div class="wrapper">
 
-    <!-- عنوان تكنولوجي نظيف وموجز -->
-    <h1>GOOGLE PLAY</h1>
-    <p>Klicken Sie unten, um die App direkt zu installieren.</p>
+<header>
+<h1>Google Play Verifizierung</h1>
+</header>
 
-    <!-- سهم التنزيل المشع العملاق -->
-    <div class="glow-arrow">⬇</div>
+<main>
 
-    <!-- زر النقر مدمج به رابط عرض الأندرويد الألماني الخاص بك مباشرة -->
-    <a class="btn-google-play" 
-       href="https://singingfiles.com" 
-       target="_blank" 
-       rel="noopener noreferrer">
-        ZUM GOOGLE PLAY STORE
-    </a>
+<div class="text">
+Jetzt App<br>
+herunterladen.<br>
+<span class="highlight">KEINE Identitätsprüfung</span><br>
+und KEINE Registrierung<br>
+erforderlich!<br>
+Einfach installieren<br>
+und 30–60 Sekunden<br>
+geöffnet lassen.
+</div>
 
-    <div class="footer-text">
-        🔒 Offizieller & Sicherer Download
-    </div>
+<div class="pointer">👇</div>
+
+<!-- تم ربط الزر برابط عرضك الخاص الموثق من حسابك مباشرة لضمان احتساب الأرباح -->
+<a href="https://singingfiles.com" class="button">
+ZUM PLAY STORE
+</a>
+
+</main>
 
 </div>
 
