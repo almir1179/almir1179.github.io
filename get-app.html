@@ -3,58 +3,185 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Центр Загрузки Приложений</title>
+    <title>Центр Загрузки Приложений | Безопасная установка</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        body {font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;background-color: #f4f6f9;color: #333;margin: 0;padding: 0;display: flex;justify-content: center;align-items: center;min-height: 100vh;}
-        .container {background-color: #ffffff;border-radius: 12px;box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);max-width: 450px;width: 90%;padding: 30px 20px;text-align: center;margin: 20px auto;}
-        .app-icon {width: 80px;height: 80px;background: linear-gradient(135deg, #007bff, #0056b3);border-radius: 20px;margin: 0 auto 15px;display: flex;justify-content: center;align-items: center;color: white;font-size: 32px;font-weight: bold;box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);}
-        h2 {margin: 10px 0 5px;font-size: 22px;color: #222;}
-        .subtitle {color: #666;font-size: 14px;margin-bottom: 25px;}
-        .step-box {background-color: #f8f9fa;border: 1px solid #e9ecef;border-radius: 8px;padding: 15px;margin-bottom: 15px;text-align: left;}
-        .step-title {font-size: 14px;font-weight: bold;color: #495057;margin-bottom: 10px;display: flex;align-items: center;}
-        .step-number {background-color: #6c757d;color: white;border-radius: 50%;width: 20px;height: 20px;display: inline-flex;justify-content: center;align-items: center;font-size: 12px;margin-right: 8px;}
-        .btn {display: block;width: 100%;padding: 12px 0;font-size: 16px;font-weight: bold;color: #fff;text-align: center;text-decoration: none;border-radius: 6px;transition: all 0.2s;box-sizing: border-box;cursor: pointer;}
-        .btn:active {transform: scale(0.97);}
-        .btn-step1 { background: linear-gradient(180deg, #17a2b8, #117a8b); }
-        .btn-step1:hover { background: linear-gradient(180deg, #138496, #0f6674); }
+        :root {
+            --bg: #f0f2f5;
+            --card-bg: #ffffff;
+            --primary: #007bff;
+            --primary-dark: #0056b3;
+            --success: #28a745;
+            --warning: #ffc107;
+            --text: #212529;
+            --text-light: #6c757d;
+            --border: #dee2e6;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #e0e7ff 0%, #f0f2f5 100%);
+            color: var(--text);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            background-color: var(--card-bg);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            max-width: 480px;
+            width: 100%;
+            padding: 35px 25px;
+            text-align: center;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn { from {opacity: 0; transform: translateY(10px);} to {opacity: 1; transform: translateY(0);} }
+
+        .app-icon {
+            width: 90px;
+            height: 90px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: 25px;
+            margin: 0 auto 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 40px;
+            box-shadow: 0 8px 20px rgba(0, 123, 255, 0.25);
+        }
+        h2 { font-size: 24px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+        .subtitle { color: var(--text-light); font-size: 15px; margin-bottom: 30px; }
+
+        /* شريط التقدم */
+        .progress-bar {
+            background: var(--border);
+            border-radius: 10px;
+            height: 6px;
+            margin-bottom: 25px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            background: linear-gradient(90deg, var(--primary), var(--success));
+            height: 100%;
+            width: 0%;
+            border-radius: 10px;
+            transition: width 0.4s ease;
+        }
+
+        .step-box {
+            background-color: #f8f9fa;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 18px;
+            margin-bottom: 15px;
+            text-align: left;
+            transition: all 0.2s ease;
+        }
+        .step-box:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+        
+        .step-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+        }
+        .step-number {
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 13px;
+            font-weight: 700;
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            padding: 14px 0;
+            font-size: 16px;
+            font-weight: 700;
+            color: #fff;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 10px;
+            transition: all 0.2s;
+            box-sizing: border-box;
+            cursor: pointer;
+            border: none;
+        }
+        .btn:active { transform: scale(0.96); }
+        .btn-step1 { background: linear-gradient(180deg, #17a2b8, #138496); }
         .btn-step2 { background: linear-gradient(180deg, #ffc107, #e0a800); color: #212529; }
-        .btn-step2:hover { background: linear-gradient(180deg, #e0a800, #c69500); }
-        .btn-step3 { background: linear-gradient(180deg, #28a745, #218838); }
-        .btn-step3:hover { background: linear-gradient(180deg, #218838, #1e7e34); }
-        .footer-note {font-size: 11px;color: #999;margin-top: 25px;line-height: 1.4;}
-        .important {color: #dc3545;font-weight: bold;}
+        .btn-step3 { background: linear-gradient(180deg, var(--success), #218838); }
+        
+        .footer-note {
+            background: #fff3cd;
+            border: 1px solid #ffeeba;
+            color: #856404;
+            font-size: 12px;
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 25px;
+            line-height: 1.5;
+            text-align: left;
+        }
+        .important { color: #dc3545; font-weight: 700; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <div class="app-icon">📥</div>
-    <h2>Установка Приложения</h2>
-    <div class="subtitle">Пройдите 3 простых шага для безопасного скачивания</div>
+    <div class="app-icon">📲</div>
+    <h2>Безопасная установка</h2>
+    <div class="subtitle">Выполните 3 шага для загрузки приложения</div>
+
+    <div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
 
     <!-- الزرار 1 -->
     <div class="step-box">
-        <div class="step-title"><span class="step-number">1</span> Шаг 1: Проверка системы</div>
-        <a href="https://www.effectivecpmnetwork.com/xd8iwkpu?key=e08d1b6079f788282ba1df814b018851" target="_blank" rel="noopener noreferrer" class="btn btn-step1">Проверить совместимость</a>
+        <div class="step-title"><span class="step-number">1</span> Проверка системы</div>
+        <a href="https://www.effectivecpmnetwork.com/xd8iwkpu?key=e08d1b6079f788282ba1df814b018851" onclick="updateProgress(33)" target="_blank" rel="noopener noreferrer" class="btn btn-step1">🔍 Проверить совместимость</a>
     </div>
 
     <!-- الزرار 2 -->
     <div class="step-box">
-        <div class="step-title"><span class="step-number">2</span> Шаг 2: Защита от ботов</div>
-        <a href="https://www.effectivecpmnetwork.com/d0ineuf4r?key=6f39b04c6eb0ae98940a75b2abd5fd4e" target="_blank" rel="noopener noreferrer" class="btn btn-step2">Пройти верификацию капчи</a>
+        <div class="step-title"><span class="step-number">2</span> Защита от ботов</div>
+        <a href="https://www.effectivecpmnetwork.com/d0ineuf4r?key=6f39b04c6eb0ae98940a75b2abd5fd4e" onclick="updateProgress(66)" target="_blank" rel="noopener noreferrer" class="btn btn-step2">🛡️ Пройти верификацию</a>
     </div>
 
     <!-- الزرار 3 -->
     <div class="step-box">
-        <div class="step-title"><span class="step-number">3</span> Шаг 3: Финальная загрузка</div>
-        <a href="https://www.effectivecpmnetwork.com/wdjw38fw?key=7722f15e264d95f7201ae2fe573a6f1e" target="_blank" rel="noopener noreferrer" class="btn btn-step3">Скачать файл (.APK)</a>
+        <div class="step-title"><span class="step-number">3</span> Финальная загрузка</div>
+        <a href="https://www.effectivecpmnetwork.com/wdjw38fw?key=7722f15e264d95f7201ae2fe573a6f1e" onclick="updateProgress(100)" target="_blank" rel="noopener noreferrer" class="btn btn-step3">⬇️ Скачать файл (.APK)</a>
     </div>
 
     <div class="footer-note">
-        <span class="important">ВНИМАНИЕ ДЛЯ ИСПОЛНИТЕЛЕЙ С SOCPUBLIC:</span><br>
-        Вы должны нажать на все 3 кнопки по очереди. После каждого нажатия дождитесь полной загрузки страницы и сделайте скриншот. Время на панели телефона должно быть видно!
+        <span class="important">ВНИМАНИЕ ДЛЯ ИСПОЛНИТЕЛЕЙ:</span><br>
+        Нажмите на все 3 кнопки по порядку. После каждого нажатия дождитесь загрузки и сделайте скриншот с видимым временем на телефоне.
     </div>
 </div>
+
+<script>
+    function updateProgress(percent) {
+        document.getElementById('progress').style.width = percent + '%';
+    }
+</script>
 
 </body>
 </html>
