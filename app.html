@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أكمل العرض للحصول على الرمز</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; background-color: #f4f7f6; padding: 50px; }
+        .container { max-width: 500px; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin: 0 auto; }
+        h2 { color: #333; }
+        .btn-offer { display: inline-block; background-color: #28a745; color: white; padding: 12px 25px; text-decoration: none; border-radius: 5px; font-weight: bold; margin: 20px 0; transition: 0.3s; cursor: pointer; }
+        .btn-offer:hover { background-color: #218838; }
+        .pcode-box { display: none; background: #e9ecef; border: 2px dashed #6c757d; padding: 15px; font-size: 22px; font-weight: bold; color: #dc3545; letter-spacing: 2px; margin-top: 20px; border-radius: 5px; }
+        .loading-text { display: none; color: #007bff; font-weight: bold; margin-top: 15px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>🔒 نظام التحقق الذكي والمحمي</h2>
+    <p>اضغط على الزر أدناه لإكمال العرض، وسيتولى السيرفر الآمن إظهار الكود الخاص بك تلقائياً بعد ثوانٍ.</p>
+    
+    <!-- استبدل هذا الرابط برابط عرض CPAGrip الخاص بك -->
+    <a href="https://www.cpagrip_link_here.com" target="_blank" class="btn-offer" id="offerBtn">اضغط هنا لإكمال العرض 🚀</a>
+    
+    <div class="loading-text" id="loadingText">جاري التحقق من إتمام العرض وتوليد كودك الآمن...</div>
+
+    <div class="pcode-box" id="pcodeContainer">
+        PCODE: <span id="pcodeValue">------</span>
+    </div>
+</div>
+
+<script>
+    // الرابط الجديد المأخوذ من شاشتك الحالية
+    const WORKER_URL = "https://workers.dev";
+
+    document.getElementById('offerBtn').addEventListener('click', function() {
+        document.getElementById('loadingText').style.display = 'block';
+
+        // انتظار 10 ثوانٍ ثم جلب الكود من السيرفر
+        setTimeout(() => {
+            fetch(WORKER_URL)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('loadingText').style.display = 'none';
+                    document.getElementById('pcodeValue').innerText = data.pcode;
+                    document.getElementById('pcodeContainer').style.display = 'block';
+                })
+                .catch(err => {
+                    document.getElementById('loadingText').innerText = "حدث خطأ، يرجى إعادة المحاولة.";
+                    console.error("Error fetching Pcode:", err);
+                });
+        }, 10000); 
+    });
+
+    // حماية الصفحة من فتح أدوات المطور
+    document.addEventListener('contextmenu', event => event.preventDefault());
+    document.addEventListener('keydown', event => {
+        if (event.keyCode === 123 || (event.ctrlKey && event.shiftKey && (event.keyCode === 73 || event.keyCode === 74))) {
+            event.preventDefault();
+        }
+    });
+</script>
+
+</body>
+</html>
