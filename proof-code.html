@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Congratulations! Your Secret Code</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; background-color: #f4f7f6; padding: 50px; }
+        .container { max-width: 500px; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin: 0 auto; }
+        h2 { color: #28a745; }
+        .pcode-box { background: #e9ecef; border: 2px dashed #28a745; padding: 15px; font-size: 24px; font-weight: bold; color: #155724; letter-spacing: 2px; margin: 20px 0; border-radius: 5px; display: inline-block; width: 80%; }
+        p { color: #6c757d; font-size: 14px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Thank You! Verification Successful 🎉</h2>
+    <p>Copy the secret code below and paste it into SproutGigs to prove you completed the task:</p>
+    
+    <div class="pcode-box">
+        <span id="pcodeValue">LOADING...</span>
+    </div>
+    
+    <p id="workerInfo">Worker ID: Loading...</p>
+    <p>Note: This code is secured and changes automatically every 30 minutes.</p>
+</div>
+
+<script>
+    const SECRET_SALT = "MY_FINAL_LOCK_999"; // غير دي لحاجة سرية
+    const SHEET_WEBHOOK = "حط_رابط_AppsScript_هنا"; // رابط الويب اب بتاع جوجل شيت
+
+    function generatePcode() {
+        const now = new Date();
+        const rawString = `${now.getUTCFullYear()}-${now.getUTCMonth()}-${now.getUTCDate()}-${now.getUTCHours()}-${Math.floor(now.getUTCMinutes() / 30)}-${SECRET_SALT}`;
+        const hash = btoa(rawString).replace(/[^a-zA-Z0-9]/g, '');
+        return "P-" + hash.substring(hash.length - 8).toUpperCase();
+    }
+
+    // 1. جيب الـ subid من الرابط
+    const urlParams = new URLSearchParams(window.location.search);
+    const workerId = urlParams.get('subid') || "UNKNOWN";
+
+    const pcode = generatePcode();
+    document.getElementById('pcodeValue').innerText = pcode;
+    document.getElementById('workerInfo').innerText = `Worker ID: ${workerId}`;
+
+    // 2. ابعت الكود للشيت تلقائي
+    fetch(`${SHEET_WEBHOOK}?action=save_pcode&subid=${workerId}&pcode=${pcode}`)
+    .catch(err => console.log("Error sending pcode"));
+
+</script>
+
+</body>
+</html>
