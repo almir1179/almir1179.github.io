@@ -5,45 +5,75 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Congratulations! Your Secret Code</title>
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; background-color: #f4f7f6; padding: 50px; }
-        .container { max-width: 500px; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin: 0 auto; }
-        h2 { color: #28a745; }
-        .pcode-box { background: #e9ecef; border: 2px dashed #28a745; padding: 15px; font-size: 24px; font-weight: bold; color: #155724; letter-spacing: 2px; margin: 20px 0; border-radius: 5px; display: inline-block; width: 80%; }
-        p { color: #6c757d; font-size: 14px; }
+        body { font-family: Arial, sans-serif; text-align: center; background-color: #f4f7f6; padding: 50px 20px; }
+        .container { max-width: 500px; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin: 0 auto; }
+        h2 { color: #28a745; margin-top: 0; }
+        .pcode-box { background: #e9ecef; border: 2px dashed #28a745; padding: 15px; border-radius: 6px; margin: 20px auto; display: flex; align-items: center; justify-content: center; gap: 10px; width: 85%; }
+        .code-text { font-size: 24px; font-weight: bold; color: #155724; letter-spacing: 2px; font-family: monospace; }
+        .copy-btn { background: #28a745; border: none; color: white; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 13px; font-weight: bold; transition: background 0.2s; }
+        .copy-btn:hover { background: #218838; }
+        p { color: #6c757d; font-size: 14px; line-height: 1.5; }
+        .warning-text { color: #dc3545; font-weight: bold; }
     </style>
 </head>
 <body>
 
 <div class="container">
     <h2>Thank You! Verification Successful 🎉</h2>
-    <p>Copy the secret code below and paste it into SproutGigs. Remember to take a FULL screenshot of this page without cropping!</p>
+    <p>Copy the secret code below and paste it into the SproutGigs task proof box. <br><span class="warning-text">Important: Take a FULL screenshot of this page without any cropping!</span></p>
     
     <div class="pcode-box">
-        <span id="pcodeValue">------</span>
+        <span id="pcodeValue" class="code-text">------</span>
+        <button id="copyBtn" class="copy-btn" onclick="copyCode()">COPY</button>
     </div>
     
-    <p>Note: This code changes automatically every 3 hours for maximum security (UTC Based).</p>
+    <p>Note: This secure verification code updates dynamically every hour based on global UTC time monitoring.</p>
 </div>
 
 <script>
-    const SECRET_SALT = "MY_3HOUR_LOCK_888";
+    const SECRET_SALT = "MY_6HOUR_LOCK_777";
 
-    function generate3HourPcode() {
+    function hashCode(str) {
+        let hash = 0;
+        for (let i = 0; i < str.length; i++) {
+            hash = (hash << 5) - hash + str.charCodeAt(i);
+            hash |= 0; 
+        }
+        return Math.abs(hash).toString(36).toUpperCase();
+    }
+
+    function generateHourlyPcode() {
         const now = new Date();
         const year = now.getUTCFullYear();
         const month = now.getUTCMonth() + 1; 
         const day = now.getUTCDate();
         const hour = now.getUTCHours(); 
-        
-        // 🛠️ تقسيم اليوم إلى 8 فترات (كل فترة 3 ساعات) بناءً على التوقيت العالمي
-        const timeBlock = Math.floor(hour / 3); 
+        const timeBlock = hour; // متزامن تماماً مع نظام الساعة الواحدة في لوحة التحكم
 
         const rawString = `${year}-${month}-${day}-${timeBlock}-${SECRET_SALT}`;
-        const hash = btoa(rawString).replace(/[^a-zA-Z0-9]/g, '');
-        return "P-" + hash.substring(0, 8).toUpperCase();
+        return "P-" + hashCode(rawString).padStart(8, 'X');
     }
 
-    document.getElementById('pcodeValue').innerText = generate3HourPcode();
+    function updateCodeOnPage() {
+        document.getElementById('pcodeValue').innerText = generateHourlyPcode();
+    }
+
+    function copyCode() {
+        const code = document.getElementById('pcodeValue').innerText;
+        const btn = document.getElementById('copyBtn');
+        navigator.clipboard.writeText(code).then(() => {
+            btn.innerText = "COPIED!";
+            btn.style.background = "#155724";
+            setTimeout(() => {
+                btn.innerText = "COPY";
+                btn.style.background = "#28a745";
+            }, 1500);
+        });
+    }
+
+    // التحديث الفوري عند التحميل والفحص المستمر كل 60 ثانية
+    updateCodeOnPage();
+    setInterval(updateCodeOnPage, 60000);
 </script>
 
 </body>
