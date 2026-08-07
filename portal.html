@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NC LIQUIDITY | Worker Verification Portal</title>
+<style>
+    :root {
+        --primary: #2563eb; --primary-dark: #1d4ed8; --bg: #f8fafc; --card: #ffffff;
+        --text: #0f172a; --text-muted: #64748b; --border: #e2e8f0; --success: #16a34a;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    body { background: var(--bg); color: var(--text); display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; }
+
+  .dashboard { max-width: 550px; width: 100%; animation: fadeIn 0.6s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+  .logo { display: flex; align-items: center; gap: 12px; margin-bottom: 25px; justify-content: center; }
+  .logo-icon { font-size: 32px; background: #eff6ff; padding: 10px; border-radius: 12px; }
+  .logo h2 { font-size: 20px; color: var(--primary); }
+  .logo small { font-size: 12px; color: var(--text-muted); }
+
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 25px; margin-bottom: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.04); }
+
+  .welcome h1 { font-size: 20px; margin-bottom: 8px; }
+  .welcome p { color: var(--text-muted); font-size: 14px; }
+  .worker-name { color: var(--primary); font-weight: 600; }
+
+  .tracking { display: flex; align-items: center; justify-content: space-between; }
+  .tracking span { font-size: 13px; color: var(--text-muted); }
+  .tracking-id { background: #f1f5f9; padding: 6px 12px; border-radius: 8px; font-weight: 600; font-size: 13px; }
+
+    /* ✅ مصح اخيرا: مسافة بين.steps و.step */
+  .steps .step {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        margin-bottom: 15px;
+    }
+  .steps  .step:last-child {
+        margin-bottom: 0;
+    }
+  .step-icon { font-size: 20px; }
+  .step-text { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
+
+  .timer { display: flex; align-items: center; justify-content: center; gap: 15px; }
+  .circular { width: 60px; height: 60px; border-radius: 50%; border: 4px solid #e0f2fe; border-top-color: #0284c7; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; }
+  .timer-text { font-size: 14px; color: var(--text-muted); }
+
+  .cta-btn { background: var(--primary); color: white; border: none; width: 100%; padding: 16px; font-size: 15px; font-weight: 600; border-radius: 10px; cursor: pointer; position: relative; overflow: hidden; transition: all 0.2s; box-shadow: 0 4px 14px rgba(37,99,235,0.2); text-align: center; text-decoration: none; display: block; }
+  .cta-btn:hover { background: var(--primary-dark); transform: translateY(-2px); }
+  .cta-btn.disabled { background: #94a3b8; cursor: not-allowed; transform: none; box-shadow: none; pointer-events: none; opacity: 0.6; }
+  .cta-btn:active::after { content: ''; position: absolute; width: 100px; height: 100px; background: rgba(255,255,255,0.3); border-radius: 50%; transform: translate(-50%,-50%) scale(0); animation: ripple 0.6s linear; left: var(--x); top: var(--y); }
+    @keyframes ripple { to { transform: translate(-50%,-50%) scale(4); opacity: 0; } }
+
+  .success-msg { display: none; text-align: center; color: var(--success); font-weight: 600; margin-top: 15px; }
+  .error { color: #ef4444; text-align: center; padding: 20px; }
+    footer { margin-top: 20px; text-align: center; font-size: 12px; color: #94a3b8; }
+</style>
+</head>
+<body>
+
+<div class="dashboard" id="dashboard">
+    <div class="logo">
+        <div class="logo-icon">🚀</div>
+        <div>
+            <h2>NC LIQUIDITY</h2>
+            <small>Worker Verification Portal</small>
+        </div>
+    </div>
+
+    <div class="card welcome">
+        <h1>Welcome, <span class="worker-name" id="worker">...</span></h1>
+        <p>Complete the task below to secure your approval.</p>
+    </div>
+
+    <div class="card tracking">
+        <span>Tracking ID</span>
+        <span class="tracking-id" id="trackingId">...</span>
+    </div>
+
+    <div class="card timer" id="timerWrapper">
+        <div class="circular" id="countdown">05:00</div>
+        <div class="timer-text">Suggested completion time</div>
+    </div>
+
+    <div class="card steps">
+        <div class="step"><div class="step-icon">1️⃣</div><div class="step-text">Click the button below to open the official offer page.</div></div>
+        <div class="step"><div class="step-icon">2️⃣</div><div class="step-text">Complete the ad offer fully using real and valid info. No fake data.</div></div>
+        <div class="step"><div class="step-icon">3️⃣</div><div class="step-text"><b>Do not use VPN or Proxy</b> during execution.</div></div>
+    </div>
+
+    <a id="gatewayBtn" class="cta-btn" href="#">GO TO OFFER</a>
+    <div class="success-msg" id="successMsg">✅ Redirecting to offer... Good luck!</div>
+</div>
+
+<footer>NC LIQUIDITY © 2026</footer>
+
+<script>
+    const els = {
+        worker: document.getElementById("worker"),
+        trackingId: document.getElementById("trackingId"),
+        gatewayBtn: document.getElementById("gatewayBtn"),
+        countdown: document.getElementById("countdown"),
+        timerWrapper: document.getElementById("timerWrapper"),
+        successMsg: document.getElementById("successMsg"),
+        dashboard: document.getElementById("dashboard")
+    };
+
+    for(const k in els){
+        if(!els[k]){
+            els.dashboard.innerHTML = `<div class="error">Fatal Error: Missing #${k}</div>`;
+            throw new Error(`Missing element: ${k}`);
+        }
+    }
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const workerId = urlParams.get('username');
+
+    if(!workerId || workerId.trim() === ""){
+        els.dashboard.innerHTML = `<div class="card error">Error: Invalid Worker ID<br><small>Please open this task from the official platform.</small></div>`;
+        els.gatewayBtn.style.display = 'none';
+    } else {
+        const displayName = workerId.length > 30? workerId.substring(0,30) + "..." : workerId;
+        els.worker.textContent = displayName;
+        els.trackingId.textContent = displayName;
+
+        const offerLink = "https://lock.cpagrip.com/xxxxx"; // 👈 حط رابط العرض بتاعك هنا
+        const finalLink = offerLink + "?subid=" + encodeURIComponent(workerId);
+
+        if (!offerLink ||!offerLink.includes("cpagrip")) {
+            els.gatewayBtn.removeAttribute("href");
+            els.gatewayBtn.classList.add("disabled");
+            els.gatewayBtn.textContent = "Offer unavailable";
+        } else {
+            els.gatewayBtn.href = finalLink;
+            els.gatewayBtn.target = "_blank";
+            els.gatewayBtn.rel = "noopener noreferrer";
+        }
+
+        els.gatewayBtn.addEventListener('click', function(e){
+            if(!this.href) return;
+            const rect = e.target.getBoundingClientRect();
+            e.target.style.setProperty('--x', e.clientX - rect.left + 'px');
+            e.target.style.setProperty('--y', e.clientY - rect.top + 'px');
+            els.successMsg.style.display = 'block';
+        });
+
+        let time = 300;
+        const timer = setInterval(() => {
+            if(time <= 0){ clearInterval(timer); els.countdown.textContent = "00:00"; return; }
+            const m = String(Math.floor(time / 60)).padStart(2, "0");
+            const s = String(time % 60).padStart(2, "0");
+            els.countdown.textContent = `${m}:${s}`;
+            time--;
+        }, 1000);
+    }
+</script>
+
+</body>
+  </html>
