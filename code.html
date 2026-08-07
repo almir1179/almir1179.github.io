@@ -22,36 +22,28 @@
         <span id="pcodeValue">------</span>
     </div>
     
-    <p>Note: This code changes automatically every 6 hours for maximum security (UTC Based).</p>
+    <p>Note: This code changes automatically every 3 hours for maximum security (UTC Based).</p>
 </div>
 
 <script>
-    const SECRET_SALT = "MY_6HOUR_LOCK_777";
+    const SECRET_SALT = "MY_3HOUR_LOCK_888";
 
-    // 🛠️ دالة الخلط الرياضية الذكية لمنع تكرار الأكواد
-    function hashCode(str) {
-        let hash = 0;
-        for (let i = 0; i < str.length; i++) {
-            hash = (hash << 5) - hash + str.charCodeAt(i);
-            hash |= 0; 
-        }
-        return Math.abs(hash).toString(36).toUpperCase();
-    }
-
-    function generate6HourPcode() {
+    function generate3HourPcode() {
         const now = new Date();
         const year = now.getUTCFullYear();
         const month = now.getUTCMonth() + 1; 
         const day = now.getUTCDate();
         const hour = now.getUTCHours(); 
-        const timeBlock = Math.floor(hour / 6); 
+        
+        // 🛠️ تقسيم اليوم إلى 8 فترات (كل فترة 3 ساعات) بناءً على التوقيت العالمي
+        const timeBlock = Math.floor(hour / 3); 
 
         const rawString = `${year}-${month}-${day}-${timeBlock}-${SECRET_SALT}`;
-        // توليد الكود النهائي المخلوط بعناية
-        return "P-" + hashCode(rawString).padStart(8, 'X');
+        const hash = btoa(rawString).replace(/[^a-zA-Z0-9]/g, '');
+        return "P-" + hash.substring(0, 8).toUpperCase();
     }
 
-    document.getElementById('pcodeValue').innerText = generate6HourPcode();
+    document.getElementById('pcodeValue').innerText = generate3HourPcode();
 </script>
 
 </body>
