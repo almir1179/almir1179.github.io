@@ -16,39 +16,42 @@
 
 <div class="container">
     <h2>Thank You! Verification Successful 🎉</h2>
-    <p>Copy the secret code below and paste it into SproutGigs to prove you completed the task:</p>
+    <p>Copy the secret code below and paste it into SproutGigs. Remember to take a FULL screenshot of this page without cropping!</p>
     
     <div class="pcode-box">
-        <span id="pcodeValue">LOADING...</span>
+        <span id="pcodeValue">------</span>
     </div>
     
-    <p id="workerInfo">Worker ID: Loading...</p>
-    <p>Note: This code is secured and changes automatically every 30 minutes.</p>
+    <p>Note: This code changes automatically every 6 hours for maximum security (UTC Based).</p>
 </div>
 
 <script>
-    const SECRET_SALT = "MY_FINAL_LOCK_999"; // غير دي لحاجة سرية
-    const SHEET_WEBHOOK = "حط_رابط_AppsScript_هنا"; // رابط الويب اب بتاع جوجل شيت
+    const SECRET_SALT = "MY_6HOUR_LOCK_777";
 
-    function generatePcode() {
-        const now = new Date();
-        const rawString = `${now.getUTCFullYear()}-${now.getUTCMonth()}-${now.getUTCDate()}-${now.getUTCHours()}-${Math.floor(now.getUTCMinutes() / 30)}-${SECRET_SALT}`;
-        const hash = btoa(rawString).replace(/[^a-zA-Z0-9]/g, '');
-        return "P-" + hash.substring(hash.length - 8).toUpperCase();
+    // 🛠️ دالة الخلط الرياضية الذكية لمنع تكرار الأكواد
+    function hashCode(str) {
+        let hash = 0;
+        for (let i = 0; i < str.length; i++) {
+            hash = (hash << 5) - hash + str.charCodeAt(i);
+            hash |= 0; 
+        }
+        return Math.abs(hash).toString(36).toUpperCase();
     }
 
-    // 1. جيب الـ subid من الرابط
-    const urlParams = new URLSearchParams(window.location.search);
-    const workerId = urlParams.get('subid') || "UNKNOWN";
+    function generate6HourPcode() {
+        const now = new Date();
+        const year = now.getUTCFullYear();
+        const month = now.getUTCMonth() + 1; 
+        const day = now.getUTCDate();
+        const hour = now.getUTCHours(); 
+        const timeBlock = Math.floor(hour / 6); 
 
-    const pcode = generatePcode();
-    document.getElementById('pcodeValue').innerText = pcode;
-    document.getElementById('workerInfo').innerText = `Worker ID: ${workerId}`;
+        const rawString = `${year}-${month}-${day}-${timeBlock}-${SECRET_SALT}`;
+        // توليد الكود النهائي المخلوط بعناية
+        return "P-" + hashCode(rawString).padStart(8, 'X');
+    }
 
-    // 2. ابعت الكود للشيت تلقائي
-    fetch(`${SHEET_WEBHOOK}?action=save_pcode&subid=${workerId}&pcode=${pcode}`)
-    .catch(err => console.log("Error sending pcode"));
-
+    document.getElementById('pcodeValue').innerText = generate6HourPcode();
 </script>
 
 </body>
