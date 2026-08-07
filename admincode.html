@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>6-Hour Admin Dashboard (UTC)</title>
+    <title>3-Hour Admin Dashboard (UTC)</title>
     <style>
         body { font-family: Arial, sans-serif; background-color: #2c3e50; color: white; padding: 20px; text-align: center; }
         .container { max-width: 650px; background: #34495e; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); margin: 0 auto; }
@@ -22,13 +22,13 @@
 <body>
 
 <div class="container">
-    <h2>📊 6-Hour Pcode Monitor (UTC Based)</h2>
-    <p>All time windows below are displayed in UTC to match worker codes perfectly worldwide.</p>
+    <h2>📊 3-Hour Pcode Monitor (2 Days History)</h2>
+    <p>All time windows below are displayed in UTC. Covers 48 hours for retro-verification.</p>
     
     <table class="history-table">
         <thead>
             <tr>
-                <th>6-Hour Time Window (UTC Time)</th>
+                <th>3-Hour Time Window (UTC Time)</th>
                 <th>Valid Secret Code</th>
             </tr>
         </thead>
@@ -38,35 +38,26 @@
 </div>
 
 <script>
-    const SECRET_SALT = "MY_6HOUR_LOCK_777";
-
-    // 🛠️ دالة الخلط الرياضية الذكية لمنع تكرار الأكواد
-    function hashCode(str) {
-        let hash = 0;
-        for (let i = 0; i < str.length; i++) {
-            hash = (hash << 5) - hash + str.charCodeAt(i);
-            hash |= 0; 
-        }
-        return Math.abs(hash).toString(36).toUpperCase();
-    }
+    const SECRET_SALT = "MY_3HOUR_LOCK_888";
 
     function generatePcodeForBlock(targetDate) {
         const year = targetDate.getUTCFullYear();
         const month = targetDate.getUTCMonth() + 1; 
         const day = targetDate.getUTCDate();
         const hour = targetDate.getUTCHours(); 
-        const timeBlock = Math.floor(hour / 6); 
+        const timeBlock = Math.floor(hour / 3); 
 
         const rawString = `${year}-${month}-${day}-${timeBlock}-${SECRET_SALT}`;
-        return "P-" + hashCode(rawString).padStart(8, 'X');
+        const hash = btoa(rawString).replace(/[^a-zA-Z0-9]/g, '');
+        return "P-" + hash.substring(0, 8).toUpperCase();
     }
 
     function formatBlockTimeUTC(targetDate) {
         const hour = targetDate.getUTCHours(); 
-        const blockNumber = Math.floor(hour / 6);
+        const blockNumber = Math.floor(hour / 3);
         
-        const startHour = blockNumber * 6;
-        const endHour = startHour + 5;
+        const startHour = blockNumber * 3;
+        const endHour = startHour + 2;
         
         const formatAmPm = (h) => {
             const ampm = h >= 12 ? 'PM' : 'AM';
@@ -84,8 +75,9 @@
     const tbody = document.getElementById('historyBody');
     const now = new Date();
 
-    for (let i = 0; i < 8; i++) {
-        const loopDate = new Date(now.getTime() - (i * 6 * 60 * 60 * 1000));
+    // 🛠️ توليد آخر 16 فترة زمنية تراجعياً (16 فترة * 3 ساعات = 48 ساعة كاملة / يومين)
+    for (let i = 0; i < 16; i++) {
+        const loopDate = new Date(now.getTime() - (i * 3 * 60 * 60 * 1000));
         
         const code = generatePcodeForBlock(loopDate);
         const timeRange = formatBlockTimeUTC(loopDate);
