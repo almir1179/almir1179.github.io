@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Advanced Admin Dashboard - 24H History</title>
+    <title>6-Hour Admin Dashboard (UTC)</title>
     <style>
         body { font-family: Arial, sans-serif; background-color: #2c3e50; color: white; padding: 20px; text-align: center; }
         .container { max-width: 650px; background: #34495e; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); margin: 0 auto; }
-        h2 { margin-bottom: 5px; color: #1abc9c; }
+        h2 { color: #1abc9c; margin-bottom: 5px; }
         p { color: #bdc3c7; font-size: 14px; margin-bottom: 25px; }
         .history-table { width: 100%; border-collapse: collapse; margin-top: 10px; background: #2c3e50; border-radius: 8px; overflow: hidden; }
         .history-table th, .history-table td { padding: 12px; text-align: center; border-bottom: 1px solid #34495e; }
@@ -22,71 +22,79 @@
 <body>
 
 <div class="container">
-    <h2>📊 24-Hour Pcode History</h2>
-    <p>Check the table below to verify codes submitted by workers within the last 24 hours.</p>
+    <h2>📊 6-Hour Pcode Monitor (UTC Based)</h2>
+    <p>All time windows below are displayed in UTC to match worker codes perfectly worldwide.</p>
     
     <table class="history-table">
         <thead>
             <tr>
-                <th>Time Window (Your Local Time)</th>
+                <th>6-Hour Time Window (UTC Time)</th>
                 <th>Valid Secret Code</th>
             </tr>
         </thead>
         <tbody id="historyBody">
-            <!-- Codes will be generated here automatically -->
         </tbody>
     </table>
 </div>
 
 <script>
-    // يجب أن تطابق هذه الكلمة ملف code.html تماماً
-    const SECRET_SALT = "MY_FINAL_LOCK_999";
+    const SECRET_SALT = "MY_6HOUR_LOCK_777";
 
-    function generatePcodeForTime(baseDate, offsetMinutes) {
-        const targetDate = new Date(baseDate.getTime() + (offsetMinutes * 60 * 1000));
-        
-        const year = targetDate.getUTCFullYear();
-        const month = targetDate.getUTCMonth();
-        const day = targetDate.getUTCDate();
-        const hour = targetDate.getUTCHours();
-        const block = Math.floor(targetDate.getUTCMinutes() / 30); 
-
-        const rawString = `${year}-${month}-${day}-${hour}-${block}-${SECRET_SALT}`;
-        const hash = btoa(rawString).replace(/[^a-zA-Z0-9]/g, '');
-        return "P-" + hash.substring(hash.length - 8).toUpperCase();
+    // 🛠️ دالة الخلط الرياضية الذكية لمنع تكرار الأكواد
+    function hashCode(str) {
+        let hash = 0;
+        for (let i = 0; i < str.length; i++) {
+            hash = (hash << 5) - hash + str.charCodeAt(i);
+            hash |= 0; 
+        }
+        return Math.abs(hash).toString(36).toUpperCase();
     }
 
-    function formatLockerTime(baseDate, offsetMinutes) {
-        const start = new Date(baseDate.getTime() + (offsetMinutes * 60 * 1000));
+    function generatePcodeForBlock(targetDate) {
+        const year = targetDate.getUTCFullYear();
+        const month = targetDate.getUTCMonth() + 1; 
+        const day = targetDate.getUTCDate();
+        const hour = targetDate.getUTCHours(); 
+        const timeBlock = Math.floor(hour / 6); 
+
+        const rawString = `${year}-${month}-${day}-${timeBlock}-${SECRET_SALT}`;
+        return "P-" + hashCode(rawString).padStart(8, 'X');
+    }
+
+    function formatBlockTimeUTC(targetDate) {
+        const hour = targetDate.getUTCHours(); 
+        const blockNumber = Math.floor(hour / 6);
         
-        // ضبط الدقائق لتوضيح بداية ونهاية النصف ساعة
-        const startMin = start.getMinutes() < 30 ? "00" : "30";
-        const endMin = start.getMinutes() < 30 ? "29" : "59";
+        const startHour = blockNumber * 6;
+        const endHour = startHour + 5;
         
-        // تحويل الساعة لصيغة 12 ساعة (AM/PM) مريحة لعينيك
-        let hours = start.getHours();
-        const ampm = hours >= 12 ? 'PM' : 'AM';
-        hours = hours % 12;
-        hours = hours ? hours : 12; // الساعة 0 تصبح 12
+        const formatAmPm = (h) => {
+            const ampm = h >= 12 ? 'PM' : 'AM';
+            let displayH = h % 12;
+            displayH = displayH ? displayH : 12;
+            return `${displayH}:00 ${ampm}`;
+        };
+
+        const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        const dayLabel = `${months[targetDate.getUTCMonth()]} ${targetDate.getUTCDate()}`;
         
-        return `${hours}:${startMin} ${ampm} to ${hours}:${endMin} ${ampm}`;
+        return `${dayLabel} (${formatAmPm(startHour)} to ${formatAmPm(endHour)}:59 UTC)`;
     }
 
     const tbody = document.getElementById('historyBody');
     const now = new Date();
 
-    // توليد الأكواد لـ 48 كتلة زمنية سابقة (48 * 30 دقيقة = 24 ساعة كاملة)
-    for (let i = 0; i < 48; i++) {
-        const offset = -i * 30; // الرجوع للخلف بـ 30 دقيقة في كل لفة
+    for (let i = 0; i < 8; i++) {
+        const loopDate = new Date(now.getTime() - (i * 6 * 60 * 60 * 1000));
         
-        const code = generatePcodeForTime(now, offset);
-        const timeRange = formatLockerTime(now, offset);
+        const code = generatePcodeForBlock(loopDate);
+        const timeRange = formatBlockTimeUTC(loopDate);
         
         const row = document.createElement('tr');
-        if (i === 0) row.className = 'current-row'; // تمييز النصف ساعة الحالية باللون الأخضر
+        if (i === 0) row.className = 'current-row';
         
         row.innerHTML = `
-            <td class="time-text">${i === 0 ? "🔥 NOW (" + timeRange + ")" : timeRange}</td>
+            <td class="time-text">${i === 0 ? "🔥 ACTIVE NOW (" + timeRange + ")" : timeRange}</td>
             <td><span class="code-text">${code}</span></td>
         `;
         tbody.appendChild(row);
@@ -95,4 +103,3 @@
 
 </body>
 </html>
-
