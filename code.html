@@ -8,20 +8,71 @@
         body { font-family: Arial, sans-serif; text-align: center; background-color: #f4f7f6; padding: 50px 20px; }
         .container { max-width: 500px; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin: 0 auto; }
         h2 { color: #28a745; margin-top: 0; }
-        .pcode-box { background: #e9ecef; border: 2px dashed #28a745; padding: 15px; border-radius: 6px; margin: 20px auto; display: block; text-align: center; width: 85%; }
-        .code-text { font-size: 26px; font-weight: bold; color: #155724; letter-spacing: 2px; font-family: monospace; display: block; width: 100%; }
         p { color: #6c757d; font-size: 14px; line-height: 1.5; }
         .warning-text { color: #dc3545; font-weight: bold; font-size: 15px; }
+        
+        .input-section { margin: 20px 0; background: #f8f9fa; padding: 18px; border-radius: 8px; border: 1px solid #dee2e6; }
+        .input-section label { display: block; font-weight: bold; color: #495057; margin-bottom: 10px; font-size: 14px; }
+        .input-section input { width: 85%; padding: 12px; border: 2px solid #ced4da; border-radius: 6px; font-size: 16px; text-align: center; outline: none; }
+        .input-section input:focus { border-color: #28a745; }
+        .unlock-btn { background: #28a745; border: none; color: white; padding: 12px; border-radius: 6px; cursor: pointer; font-size: 15px; font-weight: bold; margin-top: 12px; width: 90%; transition: background 0.2s; }
+        .unlock-btn:hover { background: #218838; }
+
+        /* 🛡️ الحصن الأمني: شبكة الخطوط البنكية المعقدة لمنع التزوير بالفوتوشوب */
+        .pcode-box { 
+            background-color: #e9ecef;
+            background-image: 
+                repeating-linear-gradient(45deg, rgba(40, 167, 69, 0.04) 0px, rgba(40, 167, 69, 0.04) 2px, transparent 2px, transparent 10px),
+                repeating-linear-gradient(-45deg, rgba(40, 167, 69, 0.04) 0px, rgba(40, 167, 69, 0.04) 2px, transparent 2px, transparent 10px),
+                repeating-linear-gradient(115deg, rgba(108, 117, 125, 0.05) 0px, rgba(108, 117, 125, 0.05) 4px, transparent 4px, transparent 12px),
+                repeating-linear-gradient(25deg, rgba(0, 0, 0, 0.03) 0px, rgba(0, 0, 0, 0.03) 3px, transparent 3px, transparent 15px);
+            border: 2px dashed #28a745; 
+            padding: 25px 15px; 
+            border-radius: 6px; 
+            margin: 20px auto; 
+            display: none; 
+            text-align: center; 
+            width: 85%; 
+        }
+        .code-wrapper { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 12px; }
+        .code-text { font-size: 26px; font-weight: bold; color: #155724; letter-spacing: 1px; font-family: 'Courier New', Courier, monospace; text-shadow: 1px 1px 0px #fff; }
+        .copy-btn { background: #28a745; border: none; color: white; padding: 5px 10px; border-radius: 4px; cursor: pointer; font-size: 12px; font-weight: bold; transition: background 0.2s; }
+        .copy-btn:hover { background: #218838; }
+        
+        /* طباعة الاسم والتوقيت المزامَن مباشرة فوق شبكة الخطوط المعقدة */
+        .verified-text { 
+            color: #212529; 
+            font-size: 13px; 
+            font-family: "Lucida Console", Monaco, monospace; 
+            font-weight: bold; 
+            display: block; 
+            margin-top: 12px; 
+            letter-spacing: 0.5px;
+            text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.8);
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
     <h2>Thank You! Verification Successful 🎉</h2>
-    <p><span class="warning-text">Important Requirement:</span> Take a FULL screenshot of this page now without any cropping! Then, type the secret code below into the SproutGigs task proof box.</p>
     
-    <div class="pcode-box">
-        <span id="pcodeValue" class="code-text">------</span>
+    <p id="instructionText">Enter your SproutGigs username below to lock and view your code. Then, take a FULL uncropped screenshot of this page!</p>
+    
+    <!-- 🔒 Anti-Cheat Verification Form -->
+    <div class="input-section" id="inputSection">
+        <label for="workerUsername">Enter your SproutGigs Username or Email:</label>
+        <input type="text" id="workerUsername" placeholder="e.g. JohnDoe123" autocomplete="off">
+        <button class="unlock-btn" onclick="revealSecureCode()">GENERATE SECRET CODE</button>
+    </div>
+
+    <!-- 📦 Secure Code Box -->
+    <div class="pcode-box" id="pcodeBox">
+        <div class="code-wrapper">
+            <span id="pcodeValue" class="code-text">------</span>
+            <button id="copyBtn" class="copy-btn" onclick="copyCode()">COPY</button>
+        </div>
+        <span id="verifiedUserText" class="verified-text">ID: </span>
     </div>
     
     <p>Note: This secure verification code updates dynamically every hour based on global UTC time monitoring.</p>
@@ -29,6 +80,8 @@
 
 <script>
     const SECRET_SALT = "MY_6HOUR_LOCK_777";
+    let lockedUsername = ""; 
+    let initialTimestamp = ""; 
 
     function hashCode(str) {
         let hash = 0;
@@ -45,18 +98,64 @@
         const month = now.getUTCMonth() + 1; 
         const day = now.getUTCDate();
         const hour = now.getUTCHours(); 
-        const timeBlock = hour; 
+        const timeBlock = hour; // نظام الساعة الواحدة المتزامن بدقة مع لوحة الإدارة
 
         const rawString = `${year}-${month}-${day}-${timeBlock}-${SECRET_SALT}`;
         return "P-" + hashCode(rawString).padStart(8, 'X');
     }
 
-    function updateCodeOnPage() {
-        document.getElementById('pcodeValue').innerText = generateHourlyPcode();
+    function getFormattedUTCTimestamp() {
+        const now = new Date();
+        const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        
+        const pad = (num) => String(num).padStart(2, '0');
+        const timeStr = `${pad(now.getUTCHours())}:${pad(now.getUTCMinutes())}:${pad(now.getUTCSeconds())}`;
+        
+        return `${months[now.getUTCMonth()]} ${now.getUTCDate()}, ${now.getUTCFullYear()} - ${timeStr} UTC`;
     }
 
-    // Update instantly on load and check every 60 seconds
-    updateCodeOnPage();
+    function revealSecureCode() {
+        const usernameInput = document.getElementById('workerUsername').value.trim();
+        
+        if (usernameInput === "") {
+            alert("Please enter your SproutGigs username or email first!");
+            return;
+        }
+
+        lockedUsername = usernameInput;
+        initialTimestamp = getFormattedUTCTimestamp(); 
+        
+        document.getElementById('inputSection').style.display = 'none';
+        document.getElementById('pcodeBox').style.display = 'block';
+        
+        // تغيير النص العلوي فوراً لإجبار العامل على أخذ اللقطة والنسخ
+        document.getElementById('instructionText').innerHTML = '<span class="warning-text">ATTENTION:</span> Take a FULL screenshot of this screen NOW without cropping! Then click COPY to submit it on SproutGigs.';
+        
+        updateCodeOnPage();
+    }
+
+    function updateCodeOnPage() {
+        if (lockedUsername !== "") {
+            const code = generateHourlyPcode();
+            document.getElementById('pcodeValue').innerText = code;
+            document.getElementById('verifiedUserText').innerText = `ID: ${lockedUsername} | ${initialTimestamp}`;
+        }
+    }
+
+    function copyCode() {
+        const code = document.getElementById('pcodeValue').innerText;
+        const btn = document.getElementById('copyBtn');
+        navigator.clipboard.writeText(code).then(() => {
+            btn.innerText = "COPIED!";
+            btn.style.background = "#155724";
+            setTimeout(() => {
+                btn.innerText = "COPY";
+                btn.style.background = "#28a745";
+            }, 1500);
+        });
+    }
+
+    // فحص دوري مستمر في الخلفية للتأكد من ثبات البيانات والمزامنة
     setInterval(updateCodeOnPage, 60000);
 </script>
 
