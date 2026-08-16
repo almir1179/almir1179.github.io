@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>High-Velocity Inventory System - NC Liquidity LLC</title>
+    <style>
+        :root {
+            --bg: #f8fafc; --card: #ffffff; --text: #0f172a; --muted: #64748b;
+            --primary: #4338ca; /* Tech Neon Indigo */
+            --orange: #f97316;  /* High-Demand Alarm Orange */
+            --green: #06b6d4;   /* System Cyan Green */
+            --blue: #3b82f6;    /* Development Royal Blue */
+            --yellow: #eab308;  /* Wholesale Gold Yellow */
+            --border: #e2e8f0;
+        }
+        [data-theme="dark"] {
+            --bg: #0f172a; --card: #1e293b; --text: #f8fafc; --muted: #94a3b8; --border: #334155;
+            --primary: #818cf8;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; padding: 15px; background: var(--bg); color: var(--text); line-height: 1.5; transition: 0.3s; }
+        
+        .top-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .theme-toggle { background: var(--card); border: 1px solid var(--border); padding: 8px 14px; border-radius: 6px; cursor: pointer; font-weight: bold; color: var(--text); }
+
+        .store-header { text-align: center; background: linear-gradient(135deg, #1e1b4b, var(--primary)); color: white; padding: 30px 15px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.15); margin-bottom: 30px; }
+        .store-header h1 { font-size: 24px; font-weight: bold; }
+        .store-header p { margin: 8px 0 0 0; font-size: 13px; color: #cbd5e1; }
+        .company-badge { display: inline-block; background: #10b981; color: white; padding: 5px 14px; border-radius: 20px; font-size: 11px; font-weight: bold; margin-top: 10px; text-transform: uppercase; }
+        
+        .shelf-container { background: var(--card); border-radius: 10px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); margin-bottom: 35px; overflow: hidden; }
+        .shelf-title { color: white; padding: 15px 20px; font-size: 16px; font-weight: bold; display: flex; justify-content: space-between; align-items: center; }
+        .badge-count { background: rgba(255,255,255,0.2); padding: 3px 10px; border-radius: 5px; font-size: 12px; }
+
+        .products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 18px; padding: 18px; }
+        
+        .product-card { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 16px; display: flex; flex-direction: column; height: auto !important; min-height: 310px; overflow: visible !important; transition: 0.2s; box-sizing: border-box; }
+        .product-card:hover { transform: translateY(-4px); box-shadow: 0 8px 18px rgba(0,0,0,0.1); }
+        
+        .product-name { font-size: 15px; font-weight: bold; color: var(--primary); margin-bottom: 8px; border-bottom: 1px dashed var(--border); padding-bottom: 6px; }
+        .product-details { font-size: 12px; color: var(--muted); margin-bottom: 14px; flex-grow: 1; height: auto; }
+        
+        .price-tag { width: 100%; font-size: 12px; margin-bottom: 14px; border-collapse: collapse; }
+        .price-tag td { padding: 6px; border: 1px solid var(--border); text-align: center; }
+        .bg-wholesale { background: #fef08a; font-weight: bold; color: #854d0e; }
+        .bg-retail { background: #ccfbf1; font-weight: bold; color: #115e59; }
+        .bg-profit { background: #10b981; color: white; font-weight: bold; }
+
+        .action-buttons { display: flex; gap: 10px; margin-top: auto; padding-top: 5px; }
+        .btn { flex: 1; text-align: center; padding: 10px; border-radius: 5px; text-decoration: none; font-size: 12px; font-weight: bold; transition: 0.2s; display: inline-block; box-sizing: border-box; }
+        .btn-wholesale { background: var(--yellow); color: #000; }
+        .btn-retail { background: #10b981; color: #fff; }
+        .btn:hover { opacity: 0.9; }
+
+        @media (max-width: 640px) { .products-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body data-theme="light">
+    <div class="top-bar">
+        <h2 style="font-size:16px;">Inventory Dashboard</h2>
+        <button class="theme-toggle" onclick="toggleTheme()">🌙 Dark</button>
+    </div>
+
+    <div class="store-header">
+        <h1>Digital Commodity Stock & Rack System</h1>
+        <p>High-Velocity Daily Essentials ➔ Automated Arbitrage ➔ USDT Liquidation</p>
+        <div class="company-badge">NC Liquidity LLC Registered</div>
+    </div>
+    <!-- RACK 1: HIGH-VELOCITY DAILY CONSUMABLES (Top Priority) -->
+    <div class="shelf-container" style="border-bottom: 10px solid var(--orange);">
+        <div class="shelf-title" style="background: var(--orange);">
+            <span>🚀 Rack 1: High-Velocity Daily Consumables (Top Demand)</span>
+            <span class="badge-count">10 Products</span>
+        </div>
+        <div class="products-grid">
+            <div class="product-card"><div class="product-name">Bulk Gmail Accounts (PVA Aged)</div><div class="product-details">Phone-verified email stock consumed heavily daily by marketing agencies for massive outreach and CRM tracking.</div><table class="price-tag"><tr><td>Cost</td><td class="bg-wholesale">$0.05</td></tr><tr><td>Retail</td><td class="bg-retail">$0.25</td></tr><tr><td>Margin</td><td class="bg-profit">+400%</td></tr></table><div class="action-buttons"><a href="https://plati.market" target="_blank" class="btn btn-wholesale">Add Stock</a><a href="https://z2u.com" target="_blank" class="btn btn-retail">List</a></div></div>
+            <div class="product-card"><div class="product-name">Netflix 1-Month Shared UHD Profile</div><div class="product-details">High-demand streaming profiles sourced from developing markets. Turns quick micro-liquidity within standard retail networks.</div><table class="price-tag"><tr><td>Cost</td><td class="bg-wholesale">$0.60</td></tr><tr><td>Retail</td><td class="bg-retail">$2.50</td></tr><tr><td>Margin</td><td class="bg-profit">+316%</td></tr></table><div class="action-buttons"><a href="https://plati.market" target="_blank" class="btn btn-wholesale">Add Stock</a><a href="https://g2g.com" target="_blank" class="btn btn-retail">List</a></div></div>
+            <div class="product-card"><div class="product-name">YouTube Premium Region-Unlocked</div><div class="product-details">Ad-free streaming setup via structural regional pricing. High consumer retention and steady repeat-purchase patterns.</div><table class="price-tag"><tr><td>Cost</td><td class="bg-wholesale">$1.10</td></tr><tr><td>Retail</td><td class="bg-retail">$4.50</td></tr><tr><td>Margin</td><td class="bg-profit">+309%</td></tr></table><div class="action-buttons"><a href="https://ggsel.net" target="_blank" class="btn btn-wholesale">Add Stock</a><a href="https://z2u.com" target="_blank" class="btn btn-retail">List</a></div></div>
+            <div class="product-card"><div class="product-name">OpenAI ChatGPT API Credits Accounts</div><div class="product-details">Pre-loaded trial and developers API tokens. Bought heavily by programmers to integrate logic flows inside software builds.</div><table class="price-tag"><tr><td>Cost</td><td class="bg-wholesale">$0.30</td></tr><tr><td>Retail</td><td class="bg-retail">$1.80</td></tr><tr><td>Margin</td><td class="bg-profit">+500%</td></tr></table><div class="action-buttons"><a href="https://plati.market" target="_blank" class="btn btn-wholesale">Add Stock</a><a href="https://g2g.com" target="_blank" class="btn btn-retail">List</a></div></div>
+            <div class="product-card"><div class="product-name">Canva Pro Private Team Invites</div><div class="product-details">Team link invites allowing institutional premium tier unlocking. Highest-ranking product for independent graphic design sellers.</div><table class="price-tag"><tr><td>Cost</td><td class="bg-wholesale">$0.50</td></tr><tr><td>Retail</td><td class="bg-retail">$2.99</td></tr><tr><td>Margin</td><td class="bg-profit">+498%</td></tr></table><div class="action-buttons"><a href="https://ggsel.net" target="_blank" class="btn btn-wholesale">Add Stock</a><a href="https://z2u.com" target="_blank" class="btn btn-retail">List</a></div></div>
+            <div class="product-card"><div class="product-name">Bulk Outlook / Hotmail Accounts</div><div class="product-details">High-turnover commodity used by developers and automated scraping tools. Rapid consumption requires weekly re-stocking.</div><table class="price-tag"><tr><td>Cost</td><td class="bg-wholesale">$0.02</td></tr><tr><td>Retail</td><td class="bg-retail">$0.12</td></tr><tr><td>Margin</td><td class="bg-profit">+500%</td></tr></table><div class="action-buttons"><a href="https://plati.market" target="_blank" class="btn btn-wholesale">Add Stock</a><a href="https://z2u.com" target="_blank" class="btn btn-retail">List</a></div></div>
+            <div class="product-card"><div class="product-name">Spotify Premium 3-Month Individual</div><div class="product-details">Music delivery service activation codes. Rapid consumption with high seasonal spikes during holidays.</div><table class="price-tag"><tr><td>Cost</td><td class="bg-wholesale">$0.70</td></tr><tr><td>Retail</td><td class="bg-retail">$2.99</td></tr><tr><td>Margin</td><td class="bg-profit">+327%</td></tr></table><div class="action-buttons"><a href="https://ggsel.net" target="_blank" class="btn btn-wholesale">Add Stock</a><a href="https://z2u.com" target="_blank" class="btn btn-retail">List</a></div></div>
+            <div class="product-card"><div class="product-name">Twitter / X Aged Accounts (2015-2020)</div><div class="product-details">Premium visibility stock. Crypto and affiliate marketers pay high prices to bypass fresh-account spam algorithms.</div><table class="price-tag"><tr><td>Cost</td><td class="bg-wholesale">$1.50</td></tr><tr><td>Retail</td><td class="bg-retail">$8.00</td></tr><tr><td>Margin</td><td class="bg-profit">+433%</td></tr></table><div class="action-buttons"><a href="https://plati.market" target="_blank" class="btn btn-wholesale">Add Stock</a><a href="https://g2g.com" target="_blank" class="btn btn-retail">List</a></div></div>
+            <div class="product-card"><div class="product-name">AI Image Generator Credits (Midjourney)</div><div class="product-details">AI imagery generation credentials. Highly valuable to freelance ad copy creators and visual artists worldwide.</div><table class="price-tag"><tr><td>Cost</td><td class="bg-wholesale">$2.00</td></tr><tr><td>Retail</td><td class="bg-retail">$7.50</td></tr><tr><td>Margin</td><td class="bg-profit">+275%</td></tr></table><div class="action-buttons"><a href="https://plati.market" target="_blank" class="btn btn-wholesale">Add Stock</a><a href="https://g2g.com" target="_blank" class="btn btn-retail">List</a></div></div>
+            <div class="product-card"><div class="product-name">Crunchyroll Premium 1-Month Access</div><div class="product-details">Anime niche specific subscription code. Highly active fanbase purchasing reliably with instant liquidation loops.</div><table class="price-tag"><tr><td>Cost</td><td class="bg-wholesale">$0.40</td></tr><tr><td>Retail</td><td class="bg-retail">$1.99</td></tr><tr><td>Margin</td><td class="bg-profit">+397%</td></tr></table><div class="action-buttons"><a href="https://plati.market" target="_blank" class="btn btn-wholesale">Add Stock</a><a href="https://g2g.com" target="_blank" class="btn btn-retail">List</a></div></div>
+        </div>
+    </div>
+    <!-- RACK 2: SYSTEM LICENSES & SECURITY UTILITIES (Secondary Priority) -->
+    <div class="shelf-container" style="border-bottom: 10px solid var(--green);">
+        <div class="shelf-title" style="background: var(--green);">
+            <span>🧼 Rack 2: System Licenses & Security Utilities</span>
+            <span class="badge-count">10 Products</span>
+        </div>
+        <div class="products-grid">
+            <div class="product-card"><div class="product-name">Windows 10/11 Pro OEM Keys</div><div class="product-details">Standard essential business commodity. Global continuous retail demand from home office upgrades and independent hardware technicians.</div><table class="price-tag"><tr><td>Cost</td><td class="bg-wholesale">$0.70</td></tr><tr><td>Retail</td><td class="bg-retail">$3.50</td></tr><tr><td>Margin</td><td class="bg-profit">+400%</td></tr></table><div class="action-buttons"><a href="https://ggsel.net" target="_blank" class="btn btn-wholesale">Add Stock</a><a href="https://z2u.com" target="_blank" class="btn btn-retail">List</a></div></div>
+            <div class="product-card"><div class="product-name">MS Office 2021 Pro Plus Binding Keys</div><div class="product-details">Essential productivity license linked directly to user accounts. Heavy corporate utility buy-rate with high global sales velocity.</div><table class="price-tag"><tr><td>Cost</td><td class="bg-wholesale">$1.20</td></tr><tr><td>Retail</td><td class="bg-retail">$5.50</td></tr><tr><td>Margin</td><td class="bg-profit">+358%</td></tr></table><div class="action-buttons"><a href="https://ggsel.net" target="_blank" class="btn btn-wholesale">Add Stock</a><a href="https://z2u.com" target="_blank" class="btn btn-retail">List</a></div></div>
+            <div class="product-card"><div class="product-name">Antivirus 1 Year License (Kaspersky)</div><div class="product-details">Digital system sanitation licenses. Constant, non-seasonal retail demand driven by global software renewing cycles.</div><table class="price-tag"><tr><td>Cost</td><td class="bg-wholesale">$1.80</td></tr><tr><td>Retail</td><td class="bg-retail">$6.00</td></tr><tr><td>Margin</td><td class="bg-profit">+233%</td></tr></table><div class="action-buttons"><a href="https://ggsel.net" target="_blank" class="btn btn-wholesale">Add Stock</a><a href="https://z2u.com" target="_blank" class="btn btn-retail">List</a></div></div>
+            <div class="product-card"><div class="product-name">Internet Download Manager (IDM) Lifetime</div><div class="product-details">Classic data fetching utility tool. Continuous transactional velocity across Middle East and Asian retail buyers.</div><table class="price-tag"><tr><td>Cost</td><td class="bg-wholesale">$1.10</td></tr><tr><td>Retail</td><td class="bg-retail">$4.99</td></tr><tr><td>Margin</td><td class="bg-profit">+353%</td></tr></table><div class="action-buttons"><a href="https://ggsel.net" target="_blank" class="btn btn-wholesale">Add Stock</a><a href="https://z2u.com" target="_blank" class="btn btn-retail">List</a></div></div>
+            <div class="product-card"><div class="product-name">Premium VPN Service (1-Year Shared)</div><div class="product-details">NordVPN, ExpressVPN or Surfshark bulk stock. Essential daily utility for privacy enthusiasts and geo-restriction bypass.</div><table class="price-tag"><tr><td>Cost</td><td class="bg-wholesale">$0.35</td></tr><tr><td>Retail</td><td class="bg-retail">$1.99</td></tr><tr><td>Margin</td><td class="bg-profit">+468%</td></tr></table><div class="action-buttons"><a href="https://ggsel.net" target="_blank" class="btn btn-wholesale">Add Stock</a><a href="https://z2u.com" target="_blank" class="btn btn-retail">List</a></div></div>
+            <div class="product-card"><div class="product-name">Malwarebytes Premium 1-Year License</div><div class="product-details">Popular secondary security layer. Massively consumed by retail users looking to sanitize malicious files from devices.</div><table class="price-tag"><tr><td>Cost</td><td class="bg-wholesale">$0.90</td></tr><tr><td>Retail</td><td class="bg-retail">$3.99</td></tr><tr><td>Margin</td><td class="bg-profit">+343%</td></tr></table><div class="action-buttons"><a href="https://ggsel.net" target="_blank" class="btn btn-wholesale">Add Stock</a><a href="https://z2u.com" target="_blank" class="btn btn-retail">List</a></div></div>
+            <div class="product-card"><div class="product-name">Adobe Creative Cloud 1-Month Access</div><div class="product-details">Shared creative suite access heavily sought-after by freelance designers needing short-term software utility.</div><table class="price-tag"><tr><td>Cost</td><td class="bg-wholesale">$2.50</td></tr><tr><td>Retail</td><td class="bg-retail">$9.99</td></tr><tr><td>Margin</td><td class="bg-profit">+300%</td></tr></table><div class="action-buttons"><a href="https://ggsel.net" target="_blank" class="btn btn-wholesale">Add Stock</a><a href="https://z2u.com" target="_blank" class="btn btn-retail">List</a></div></div>
+            <div class="product-card"><div class="product-name">Cloud Storage 1TB 1 Year</div><div class="product-details">Premium cloud storage subscription vouchers. Constant corporate and freelance project archive buy-rates.</div><table class="price-tag"><tr><td>Cost</td><td class="bg-wholesale">$25</td></tr><tr><td>Retail</td><td class="bg-retail">$69</td></tr><tr><td>Margin</td><td class="bg-profit">+176%</td></tr></table><div class="action-buttons"><a href="https://ggsel.net" target="_blank" class="btn btn-wholesale">Add Stock</a><a href="https://z2u.com" target="_blank" class="btn btn-retail">List</a></div></div>
+            <div class="product-card"><div class="product-name">Windows Server 2022 Standard Keys</div><div class="product-details">High-tier infrastructure asset. Sells to small corporate networks trying to provision cloud server environments.</div><table class="price-tag"><tr><td>Cost</td><td class="bg-wholesale">$2.20</td></tr><tr><td>Retail</td><td class="bg-retail">$12.50</td></tr><tr><td>Margin</td><td class="bg-profit">+468%</td></tr></table><div class="action-buttons"><a href="https://ggsel.net" target="_blank" class="btn btn-wholesale">Add Stock</a><a href="https://z2u.com" target="_blank" class="btn btn-retail">List</a></div></div>
+            <div class="product-card"><div class="product-name">Photo & Video Editing Software Bundle</div><div class="product-details">Perpetual commercial media production tools. Sells fast to entry-level creators.</div><table class="price-tag"><tr><td>Cost</td><td class="bg-wholesale">$70</td></tr><tr><td>Retail</td><td class="bg-retail">$165</td></tr><tr><td>Margin</td><td class="bg-profit">+141%</td></tr></table><div class="action-buttons"><a href="https://ggsel.net" target="_blank" class="btn btn-wholesale">Add Stock</a><a href="https://z2u.com" target="_blank" class="btn btn-retail">List</a></div></div>
+        </div>
+    </div>
+    <!-- RACK 3: DEV TOOLS, SCRIPTS & WEB TEMPLATES (Project Based Demand) -->
+    <div class="shelf-container" style="border-bottom: 10px solid var(--blue);">
+        <div class="shelf-title" style="background: var(--blue);">
+            <span>⚡ Rack 3: Web Templates, Automation Scripts & AI Development Resources</span>
+            <span class="badge-count">10 Products</span>
+        </div>
+        <div class="products-grid">
+            <div class="product-card"><div class="product-name">SaaS Subscription Boilerplate</div><div class="product-details">Stripe hook listeners configurations script base to deploy recurring billing frameworks directly.</div><table class="price-tag"><tr><td>Cost</td><td class="bg-wholesale">$45</td></tr><tr><td>Retail</td><td class="bg-retail">$149</td></tr><tr><td>Margin</td><td class="bg-profit">+231%</td></tr></table><div class="action-buttons"><a href="https://plati.market" target="_blank" class="btn btn-wholesale">Add Stock</a><a href="https://g2g.com" target="_blank" class="btn btn-retail">List</a></div></div>
+            <div class="product-card"><div class="product-name">Instagram Automation Bot Script</div><div class="product-details">Node.js scraping structure running via active proxy configurations to extract bulk digital insights.</div><table class="price-tag"><tr><td>Cost</td><td class="bg-wholesale">$15</td></tr><tr><td>Retail</td><td class="bg-retail">$49</td></tr><tr><td>Margin</td><td class="bg-profit">+226%</td></tr></table><div class="action-buttons"><a href="https://plati.market" target="_blank" class="btn btn-wholesale">Add Stock</a><a href="https://g2g.com" target="_blank" class="btn btn-retail">List</a></div></div>
+            <div class="product-card"><div class="product-name">E-commerce HTML Template</div><div class="product-details">Responsive shop template dashboard structure with full customizable CSS grids and layouts.</div><table class="price-tag"><tr><td>Cost</td><td class="bg-wholesale">$18</td></tr><tr><td>Retail</td><td class="bg-retail">$59</td></tr><tr><td>Margin</td><td class="bg-profit">+227%</td></tr></table><div class="action-buttons"><a href="https://plati.market" target="_blank" class="btn btn-wholesale">Add Stock</a><a href="https://z2u.com" target="_blank" class="btn btn-retail">List</a></div></div>
+            <div class="product-card"><div class="product-name">Crypto Payment Gateway PHP</div><div class="product-details">PHP core script accepting multi-chain coin settlements. Instant web integration framework.</div><table class="price-tag"><tr><td>Cost</td><td class="bg-wholesale">$25</td></tr><tr><td>Retail</td><td class="bg-retail">$89</td></tr><tr><td>Margin</td><td class="bg-profit">+256%</td></tr></table><div class="action-buttons"><a href="https://plati.market" target="_blank" class="btn btn-wholesale">Add Stock</a><a href="https://g2g.com" target="_blank" class="btn btn-retail">List</a></div></div>
+            <div class="product-card"><div class="product-name">SaaS Landing Page Kit</div><div class="product-details">10 sections Tailwind CSS. Resell license framework layout structure nodes.</div><table class="price-tag"><tr><td>Cost</td><td class="bg-wholesale">$12</td></tr><tr><td>Retail</td><td class="bg-retail">$39</td></tr><tr><td>Margin</td><td class="bg-profit">+225%</td></tr></table><div class="action-buttons"><a href="https://plati.market" target="_blank" class="btn btn-wholesale">Add Stock</a><a href="https://z2u.com" target="_blank" class="btn btn-retail">List</a></div></div>
+            <div class="product-card"><div class="product-name">Admin Dashboard UI Kit</div><div class="product-details">Figma + React components for modular enterprise panel system engineering.</div><table class="price-tag"><tr><td>Cost</td><td class="bg-wholesale">$30</td></tr><tr><td>Retail</td><td class="bg-retail">$89</td></tr><tr><td>Margin</td><td class="bg-profit">+196%</td></tr></table><div class="action-buttons"><a href="https://plati.market" target="_blank" class="btn btn-wholesale">Add Stock</a><a href="https://z2u.com" target="_blank" class="btn btn-retail">List</a></div></div>
+            <div class="product-card"><div class="product-name">Crypto Landing UI Page</div><div class="product-details">Web3 integrated layout setup with complete decentralized application source interfaces.</div><table class="price-tag"><tr><td>Cost</td><td class="bg-wholesale">$22</td></tr><tr><td>Retail</td><td class="bg-retail">$65</td></tr><tr><td>Margin</td><td class="bg-profit">+195%</td></tr></table><div class="action-buttons"><a href="https://plati.market" target="_blank" class="btn btn-wholesale">Add Stock</a><a href="https://z2u.com" target="_blank" class="btn btn-retail">List</a></div></div>
+            <div class="product-card"><div class="product-name">Icon Pack 5000 SVG Vector</div><div class="product-details">Over 5000 premium vector outline icons optimized for modern mobile setups.</div><table class="price-tag"><tr><td>Cost</td><td class="bg-wholesale">$11</td></tr><tr><td>Retail</td><td class="bg-retail">$34</td></tr><tr><td>Margin</td><td class="bg-profit">+209%</td></tr></table><div class="action-buttons"><a href="https://plati.market" target="_blank" class="btn btn-wholesale">Add Stock</a><a href="https://z2u.com" target="_blank" class="btn btn-retail">List</a></div></div>
+            <div class="product-card"><div class="product-name">Real Estate Web Directory</div><div class="product-details">Advanced filtering options interface template with native map locating frameworks.</div><table class="price-tag"><tr><td>Cost</td><td class="bg-wholesale">$40</td></tr><tr><td>Retail</td><td class="bg-retail">$120</td></tr><tr><td>Margin</td><td class="bg-profit">+200%</td></tr></table><div class="action-buttons"><a href="https://plati.market" target="_blank" class="btn btn-wholesale">Add Stock</a><a href="https://z2u.com" target="_blank" class="btn btn-retail">List</a></div></div>
+            <div class="product-card"><div class="product-name">Webhook Multi-Channel Dispatcher</div><div class="product-details">Forwards instant system performance status logs directly to active Discord and Telegram endpoints.</div><table class="price-tag"><tr><td>Cost</td><td class="bg-wholesale">$7</td></tr><tr><td>Retail</td><td class="bg-retail">$25</td></tr><tr><td>Margin</td><td class="bg-profit">+257%</td></tr></table><div class="action-buttons"><a href="https://plati.market" target="_blank" class="btn btn-wholesale">Add Stock</a><a href="https://g2g.com" target="_blank" class="btn btn-retail">List</a></div></div>
+        </div>
+    </div>
+
+    <script>
+        function toggleTheme() {
+            const body = document.body;
+            const currentTheme = body.getAttribute('data-theme');
+            const button = document.querySelector('.theme-toggle');
+            
+            if (currentTheme === 'dark') {
+                body.setAttribute('data-theme', 'light');
+                button.innerHTML = '🌙 Dark';
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                button.innerHTML = '☀️ Light';
+            }
+        }
+    </script>
+</body>
+</html>
