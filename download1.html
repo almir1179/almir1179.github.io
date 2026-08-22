@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Install Yoga Workout App</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Segoe UI", Roboto, Arial, sans-serif;
+            background: linear-gradient(135deg, #111827 0%, #1f2937 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 420px;
+            background: #fff;
+            color: #333;
+            padding: 30px 25px;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .3);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .loading {
+            color: #6b7280;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .error-box {
+            background: #fee2e2;
+            color: #991b1b;
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #fca5a5;
+        }
+
+        .error-box h2 {
+            color: #991b1b;
+        }
+
+        .warning {
+            background: #fef3c7;
+            color: #92400e;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            border: 1px solid #fde68a;
+        }
+
+        .app-icon {
+            font-size: 50px;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            color: #111827;
+            margin: 5px 0 10px;
+            font-size: 22px;
+        }
+
+        p {
+            color: #4b5563;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .app-box {
+            background: #f3f4f6;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            text-align: left;
+        }
+
+        .app-box p {
+            margin: 6px 0;
+            font-size: 13px;
+            color: #374151;
+        }
+
+        .instructions {
+            background: #eff6ff;
+            border-left: 4px solid #3b82f6;
+            padding: 15px;
+            text-align: left;
+            margin: 20px 0;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        .instructions li {
+            margin-bottom: 8px;
+            color: #1e3a8a;
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 16px;
+            border: 0;
+            border-radius: 30px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: #fff;
+            font-size: 16px;
+            font-weight: 700;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            transition: opacity .2s ease;
+        }
+
+        .btn:hover {
+            opacity: .9;
+        }
+
+        .btn-disabled {
+            background: #9ca3af !important;
+            cursor: not-allowed;
+            pointer-events: none;
+            opacity: .6;
+        }
+
+        .footer {
+            font-size: 11px;
+            color: #9ca3af;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Loading -->
+    <div class="container" id="main-content">
+        <div class="loading">
+            🔒 Checking device and connection...
+        </div>
+    </div>
+
+    <!-- Access denied -->
+    <div class="container hidden" id="error-content">
+        <div class="error-box">
+            <h2>❌ Access Denied</h2>
+            <p id="error-message"></p>
+            <p style="font-size:12px;margin-top:10px;">
+                Please use a real US Android mobile connection and try again.
+            </p>
+        </div>
+    </div>
+
+    <!-- Success -->
+    <div class="container hidden" id="success-content">
+
+        <div class="warning">
+            ⚠️ US Only • Android Only • VPN/Proxy Not Accepted
+        </div>
+
+        <div class="app-icon">
+            🧘‍♀️
+        </div>
+
+        <h2>Install Yoga Workout</h2>
+
+        <p>
+            Install the Yoga Workout app from Google Play
+            and follow the task requirements.
+        </p>
+
+        <div class="app-box">
+            <p>
+                <b>App Name:</b> Yoga Workout
+            </p>
+
+            <p>
+                <b>Device:</b> Android Mobile
+            </p>
+
+            <p>
+                <b>Location:</b> United States 🇺🇸
+            </p>
+        </div>
+
+        <div class="instructions">
+            <strong>Steps to Complete:</strong>
+
+            <ol>
+                <li>Click the button below.</li>
+                <li>Install the app from Google Play Store.</li>
+                <li>Complete any additional requirements stated in the task.</li>
+            </ol>
+        </div>
+
+        <a
+            id="offerLink"
+            class="btn btn-disabled"
+            href="#"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-disabled="true"
+        >
+            Please wait (5s)...
+        </a>
+
+        <p class="footer">
+            This offer is intended for eligible US Android users only.
+        </p>
+
+    </div>
+
+<script>
+"use strict";
+
+/*
+ * ============================================================
+ * CONFIGURATION
+ * ============================================================
+ *
+ * Replace this URL with your authorized offer URL.
+ *
+ * Do not treat this client-side page as server-side security.
+ */
+const OFFER_URL =
+    "https://singingfiles.com/show.php?l=0&u=145230&id=74923";
+
+const ALLOWED_COUNTRY = "US";
+const COUNTDOWN_SECONDS = 5;
+
+const GEO_TIMEOUT_MS = 7000;
+
+
+/*
+ * ============================================================
+ * DOM
+ * ============================================================
+ */
+
+const mainContent = document.getElementById("main-content");
+const errorContent = document.getElementById("error-content");
+const successContent = document.getElementById("success-content");
+
+const errorMessage = document.getElementById("error-message");
+const offerLink = document.getElementById("offerLink");
+
+
+/*
+ * ============================================================
+ * UI HELPERS
+ * ============================================================
+ */
+
+function showError(message) {
+
+    errorMessage.textContent = message;
+
+    mainContent.classList.add("hidden");
+    successContent.classList.add("hidden");
+    errorContent.classList.remove("hidden");
+}
+
+
+function showSuccess() {
+
+    mainContent.classList.add("hidden");
+    errorContent.classList.add("hidden");
+    successContent.classList.remove("hidden");
+}
+
+
+/*
+ * ============================================================
+ * TIMEOUT FETCH
+ * ============================================================
+ */
+
+async function fetchWithTimeout(url, timeout = GEO_TIMEOUT_MS) {
+
+    const controller = new AbortController();
+
+    const timer = setTimeout(() => {
+        controller.abort();
+    }, timeout);
+
+    try {
+
+        const response = await fetch(url, {
+            method: "GET",
+            cache: "no-store",
+            credentials: "omit",
+            signal: controller.signal
+        });
+
+        if (!response.ok) {
+            throw new Error("GeoIP request failed");
+        }
+
+        return await response.json();
+
+    } finally {
+
+        clearTimeout(timer);
+    }
+}
+
+
+/*
+ * ============================================================
+ * GEOLOCATION
+ * ============================================================
+ *
+ * We require a valid US country result.
+ *
+ * If both providers fail, access is denied.
+ * This prevents a network/API failure from accidentally
+ * allowing unknown traffic.
+ * ============================================================
+ */
+
+async function getLocationData() {
+
+    /*
+     * Provider 1
+     */
+    try {
+
+        const data = await fetchWithTimeout(
+            "https://ipapi.co/json/"
+        );
+
+        if (
+            data &&
+            typeof data.country_code === "string" &&
+            data.country_code.trim() !== ""
+        ) {
+
+            return {
+                country_code: data.country_code.toUpperCase(),
+                vpn: null,
+                proxy: null,
+                hosting: null
+            };
+        }
+
+    } catch (error) {
+        console.warn("Primary GeoIP provider failed.");
+    }
+
+
+    /*
+     * Provider 2
+     */
+    try {
+
+        const data = await fetchWithTimeout(
+            "https://ipwho.is/"
+        );
+
+        if (
+            data &&
+            data.success !== false &&
+            typeof data.country_code === "string" &&
+            data.country_code.trim() !== ""
+        ) {
+
+            const security = data.security || {};
+
+            return {
+                country_code: data.country_code.toUpperCase(),
+
+                vpn:
+                    security.vpn === true
+                        ? true
+                        : null,
+
+                proxy:
+                    security.proxy === true
+                        ? true
+                        : null,
+
+                hosting:
+                    security.hosting === true
+                        ? true
+                        : null
+            };
+        }
+
+    } catch (error) {
+        console.warn("Backup GeoIP provider failed.");
+    }
+
+
+    /*
+     * Fail closed
+     */
+    throw new Error("Unable to verify location.");
+}
+
+
+/*
+ * ============================================================
+ * ANDROID CHECK
+ * ============================================================
+ */
+
+function isAndroidDevice() {
+
+    const ua = navigator.userAgent.toLowerCase();
+
+    return ua.includes("android");
+}
+
+
+/*
+ * ============================================================
+ * COUNTDOWN
+ * ============================================================
+ */
+
+function startCountdown() {
+
+    let remaining = COUNTDOWN_SECONDS;
+
+    offerLink.textContent =
+        `Please wait (${remaining}s)...`;
+
+    const interval = setInterval(() => {
+
+        remaining--;
+
+        if (remaining > 0) {
+
+            offerLink.textContent =
+                `Please wait (${remaining}s)...`;
+
+            return;
+        }
+
+        clearInterval(interval);
+
+        offerLink.href = OFFER_URL;
+
+        offerLink.classList.remove("btn-disabled");
+
+        offerLink.removeAttribute("aria-disabled");
+
+        offerLink.textContent =
+            "Go to Google Play Store";
+
+    }, 1000);
+}
+
+
+/*
+ * ============================================================
+ * MAIN CHECK
+ * ============================================================
+ */
+
+async function checkUser() {
+
+    /*
+     * 1. Android
+     */
+
+    if (!isAndroidDevice()) {
+
+        showError(
+            "This offer is available only on Android mobile devices."
+        );
+
+        return;
+    }
+
+
+    /*
+     * 2. GeoIP
+     */
+
+    let location;
+
+    try {
+
+        location = await getLocationData();
+
+    } catch (error) {
+
+        showError(
+            "We could not verify your location. Please try again using a normal internet connection."
+        );
+
+        return;
+    }
+
+
+    /*
+     * 3. Country
+     *
+     * Unknown country = reject.
+     */
+
+    if (
+        !location.country_code ||
+        location.country_code !== ALLOWED_COUNTRY
+    ) {
+
+        showError(
+            "Sorry, this offer is available only to users located in the United States."
+        );
+
+        return;
+    }
+
+
+    /*
+     * 4. VPN / Proxy / Hosting
+     *
+     * Reject when the provider explicitly reports
+     * one of these as true.
+     *
+     * null means the provider did not provide that field;
+     * it is NOT treated as proof that the connection is clean.
+     */
+
+    if (
+        location.vpn === true ||
+        location.proxy === true ||
+        location.hosting === true
+    ) {
+
+        showError(
+            "VPN, proxy, or hosting connections are not accepted for this offer. Please use a normal residential/mobile connection."
+        );
+
+        return;
+    }
+
+
+    /*
+     * 5. Show offer
+     */
+
+    showSuccess();
+
+    startCountdown();
+}
+
+
+/*
+ * ============================================================
+ * START
+ * ============================================================
+ */
+
+checkUser();
+
+</script>
+
+</body>
+  </html>
