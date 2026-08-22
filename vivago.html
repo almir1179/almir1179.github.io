@@ -39,36 +39,37 @@
 
 <div class="container hidden" id="success-content">
     <div class="flag">🇮🇳</div>
-    <div class="warning">⚠️ केवल भारत - केवल Android - कोई VPN नहीं</div>
+    <div class="warning">⚠️ केवल आधुनिक Android मोबाइल - कोई VPN नहीं</div>
     
     <h2>Vivago.ai ऐप इंस्टॉल करें</h2>
-    <p>1 क्लिक में AI इमेज और वीडियो बनाएं</p>
+    <p>1 क्लिक में AI इमेज & वीडियो बनाएं</p>
     
     <div class="app-box">
         <p><b>ऐप का नाम:</b> Vivago.ai - AI Image & Video</p>
-        <p><b>डिवाइस:</b> Android mobile</p>
-        <p><b>लोकेशन:</b> केवल भारत</p>
+        <p><b>डिवाइस:</b> आधुनिक Android मोबाइल (High Compatibility)</p>
+        <p><b>लोकेशन:</b> केवल भारत (Mobile Data Preferred)</p>
     </div>
 
     <div class="instructions">
-        <strong>पूरा करने के स्टेप:</strong>
+        <strong>महत्वपूर्ण निर्देश (Steps to Complete):</strong>
         <ol>
-            <li>नीचे दिए बटन पर क्लिक करें</li>
-            <li>Google Play Store से ऐप इंस्टॉल करें</li>
-            <li>ऐप को 30 सेकंड तक खोलें</li>
+            <li>नीचे दिए बटन पर क्लिक करें।</li>
+            <li>Google Play Store से ऐप इंस्टॉल करें। <b>(यदि "Device not compatible" दिखाता है, तो कार्य छोड़ दें)</b>।</li>
+            <li>ऐप खोलें और अपना <b>फ्री अकाउंट (Sign Up)</b> बनाएं।</li>
+            <li>ऐप को 40 सेकंड तक इस्तेमाल करें।</li>
         </ol>
     </div>
 
-    <!-- رابط الأفليت الخاص بك مدمج هنا -->
+    <!-- رابط الأفليت الحقيقي والنشط الخاص بك مدمج وجاهز تماماً -->
     <a href="https://singingfiles.com" 
        class="btn btn-disabled" 
        id="offerLink" 
        target="_blank" 
        rel="noopener noreferrer">
-        सुरक्षित लिंक लोड हो रहा है...
+        कृपया प्रतीक्षा करें (5s)...
     </a>
 
-    <p class="footer">* कार्य भारत के Android डिवाइस से ही पूरा होना चाहिए</p>
+    <p class="footer">* कार्य केवल भारत के वैध डिवाइस से ही पूरा होना चाहिए।</p>
 </div>
 
 <script>
@@ -78,18 +79,16 @@ async function checkUser() {
     const success = document.getElementById('success-content');
     const errorMsg = document.getElementById('error-message');
 
-    // 1. Device Check - Android (تم تعطيله مؤقتاً للاختبار من أي جهاز)
+    // 1. Device Check - Android مفعل ومفروض بقوة لفلترة الحواسب والآيفون
     const userAgent = navigator.userAgent.toLowerCase();
     const isAndroid = userAgent.includes("android");
 
-    /* يمكنك إعادة تفعيل فحص الأندرويد لاحقاً بحذف تعليق هذا الجزء
     if (!isAndroid) {
         errorMsg.innerText = "यह ऑफर केवल Android मोबाइल डिवाइस पर उपलब्ध है।";
         main.classList.add('hidden');
         error.classList.remove('hidden');
         return;
     }
-    */
 
     // 2. Country + VPN + Proxy Check
     let data = null;
@@ -108,40 +107,47 @@ async function checkUser() {
                 hosting: backupData.security ? backupData.security.hosting : false
             };
         } catch (e2) {
-            console.log("Bypass protection for testing.");
-        }
-    }
-
-    // فحص الدولة - مخصص للمغرب للاختبار الآن
-    if (data) {
-        const cCode = data.country_code ? data.country_code.toUpperCase() : "";
-        
-        // ⚠️ تم تغيير الشرط هنا إلى MA ليسمح لك بالدخول من المغرب للتجربة
-        if (cCode !== "IN") { 
-            errorMsg.innerText = `क्षما करें, यह ऑफर केवल भारत के यूजर्स के लिए है।`;
-            main.classList.add('hidden');
-            error.classList.remove('hidden');
-            return;
-        }
-
-        // فحص الـ VPN والـ Proxy (تأكد من إيقاف الـ VPN الخاص بك أثناء التجربة)
-        if (data.vpn === true || data.proxy === true || data.hosting === true) {
-            errorMsg.innerText = "VPN या Proxy का पता चला। कृपया इसे बंद करें और पेज को रीफ्रेश करें।";
+            // إغلاق الصفحة حمايةً لأموالك لو تعطل السيرفرين تماماً لمنع تسلل الغشاشين
+            errorMsg.innerText = "सुरक्षा जांच विफल। कृपया इंटरनेट कनेक्शन जांचें।";
             main.classList.add('hidden');
             error.classList.remove('hidden');
             return;
         }
     }
 
-    // 3. Show Offer
+    // فحص الدولة - صارم وموجه حصرياً للهند (IN)
+    if (data && data.country_code && data.country_code.toUpperCase() !== "IN") { 
+        errorMsg.innerText = `क्षما करें, यह ऑफर केवल भारत के यूजर्स के लिए है।`;
+        main.classList.add('hidden');
+        error.classList.remove('hidden');
+        return;
+    }
+
+    // فحص حظر الـ VPN / Proxy / Hosting
+    if (data && (data.vpn === true || data.proxy === true || data.hosting === true)) {
+        errorMsg.innerText = "VPN या Proxy का पता चला। कृपया इसे बंद करें और पेज को रीफ्रेश करें।";
+        main.classList.add('hidden');
+        error.classList.remove('hidden');
+        return;
+    }
+
+    // 3. Show Offer + Countdown
     main.classList.add('hidden');
     success.classList.remove('hidden');
     
     const linkBtn = document.getElementById('offerLink');
-    setTimeout(() => {
-        linkBtn.classList.remove('btn-disabled');
-        linkBtn.innerText = 'Google Play पर जाएं';
-    }, 3000);
+    
+    let timeLeft = 5;
+    const countdownInterval = setInterval(() => {
+        timeLeft--;
+        if (timeLeft > 0) {
+            linkBtn.innerText = `कृपया प्रतीक्षा करें (${timeLeft}s)...`;
+        } else {
+            clearInterval(countdownInterval);
+            linkBtn.classList.remove('btn-disabled');
+            linkBtn.innerText = 'Google Play पर जाएं';
+        }
+    }, 1000);
 }
 
 checkUser();
